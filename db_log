@@ -1,0 +1,263 @@
+2026-03-02 02:17:34.192 UTC [1832] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-02 02:17:34.192 UTC [1832] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-02 02:17:34.192 UTC [1832] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-02 02:17:34.194 UTC [1832] FATAL:  could not open lock file "/var/run/postgresql/.s.PGSQL.5432.lock": Permission denied
+2026-03-02 02:17:34.196 UTC [1832] LOG:  database system is shut down
+2026-03-02 02:19:21.703 UTC [2691] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-02 02:19:21.704 UTC [2691] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-02 02:19:21.704 UTC [2691] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-02 02:19:21.708 UTC [2691] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-03-02 02:19:21.714 UTC [2694] LOG:  database system was shut down at 2026-03-02 02:17:00 UTC
+2026-03-02 02:19:21.721 UTC [2691] LOG:  database system is ready to accept connections
+2026-03-02 02:22:51.262 UTC [5745] ERROR:  unrecognized configuration parameter "transaction_timeout"
+2026-03-02 02:22:51.262 UTC [5745] STATEMENT:  SET transaction_timeout = 0;
+	
+2026-03-02 02:22:51.283 UTC [5745] ERROR:  role "postgres" does not exist
+2026-03-02 02:22:51.283 UTC [5745] STATEMENT:  ALTER TABLE public.bookings OWNER TO postgres;
+	
+	
+2026-03-02 02:22:51.285 UTC [5745] ERROR:  role "postgres" does not exist
+2026-03-02 02:22:51.285 UTC [5745] STATEMENT:  ALTER SEQUENCE public.bookings_id_seq OWNER TO postgres;
+	
+	
+2026-03-02 02:22:51.289 UTC [5745] ERROR:  role "postgres" does not exist
+2026-03-02 02:22:51.289 UTC [5745] STATEMENT:  ALTER TABLE public.events OWNER TO postgres;
+	
+	
+2026-03-02 02:22:51.294 UTC [5745] ERROR:  role "postgres" does not exist
+2026-03-02 02:22:51.294 UTC [5745] STATEMENT:  ALTER SEQUENCE public.events_id_seq OWNER TO postgres;
+	
+	
+2026-03-02 02:22:51.302 UTC [5745] ERROR:  role "postgres" does not exist
+2026-03-02 02:22:51.302 UTC [5745] STATEMENT:  ALTER TABLE public.users OWNER TO postgres;
+	
+	
+2026-03-02 02:22:51.304 UTC [5745] ERROR:  role "postgres" does not exist
+2026-03-02 02:22:51.304 UTC [5745] STATEMENT:  ALTER SEQUENCE public.users_id_seq OWNER TO postgres;
+	
+	
+2026-03-02 02:23:40.430 UTC [6150] FATAL:  database "postgre" does not exist
+2026-03-02 02:24:21.729 UTC [2692] LOG:  checkpoint starting: time
+2026-03-02 02:28:26.620 UTC [2692] LOG:  checkpoint complete: wrote 2451 buffers (15.0%); 0 WAL file(s) added, 0 removed, 1 recycled; write=244.870 s, sync=0.014 s, total=244.891 s; sync files=84, longest=0.005 s, average=0.001 s; distance=19722 kB, estimate=19722 kB
+2026-03-02 03:09:22.421 UTC [2692] LOG:  checkpoint starting: time
+2026-03-02 03:09:23.896 UTC [2692] LOG:  checkpoint complete: wrote 15 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.404 s, sync=0.035 s, total=1.475 s; sync files=10, longest=0.034 s, average=0.004 s; distance=34 kB, estimate=17753 kB
+2026-03-02 03:14:22.993 UTC [2692] LOG:  checkpoint starting: time
+2026-03-02 03:14:23.505 UTC [2692] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.503 s, sync=0.003 s, total=0.512 s; sync files=6, longest=0.002 s, average=0.001 s; distance=6 kB, estimate=15978 kB
+2026-03-02 03:24:22.701 UTC [2692] LOG:  checkpoint starting: time
+2026-03-02 03:24:23.120 UTC [2692] LOG:  checkpoint complete: wrote 5 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.402 s, sync=0.003 s, total=0.419 s; sync files=5, longest=0.002 s, average=0.001 s; distance=2 kB, estimate=14380 kB
+2026-03-03 00:50:05.069 UTC [3108] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-03 00:50:05.097 UTC [3108] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-03 00:50:05.099 UTC [3108] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-03 00:50:05.106 UTC [3108] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-03-03 00:50:05.114 UTC [3111] LOG:  database system was interrupted; last known up at 2026-03-02 03:24:23 UTC
+2026-03-03 00:50:05.274 UTC [3111] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-03-03 00:50:05.278 UTC [3111] LOG:  redo starts at 0/284DD80
+2026-03-03 00:50:05.278 UTC [3111] LOG:  invalid record length at 0/284DE68: wanted 24, got 0
+2026-03-03 00:50:05.278 UTC [3111] LOG:  redo done at 0/284DE30 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-03-03 00:50:05.283 UTC [3109] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-03-03 00:50:05.292 UTC [3109] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.010 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-03-03 00:50:05.297 UTC [3108] LOG:  database system is ready to accept connections
+2026-03-04 01:25:03.518 UTC [2425] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-04 01:25:03.519 UTC [2425] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-04 01:25:03.519 UTC [2425] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-04 01:25:03.522 UTC [2425] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-03-04 01:25:03.529 UTC [2434] LOG:  database system was interrupted; last known up at 2026-03-03 00:50:05 UTC
+2026-03-04 01:25:03.711 UTC [2434] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-03-04 01:25:03.714 UTC [2434] LOG:  redo starts at 0/284DEE0
+2026-03-04 01:25:03.715 UTC [2434] LOG:  invalid record length at 0/284DF18: wanted 24, got 0
+2026-03-04 01:25:03.715 UTC [2434] LOG:  redo done at 0/284DEE0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-03-04 01:25:03.720 UTC [2432] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-03-04 01:25:03.727 UTC [2432] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.009 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-03-04 01:25:03.732 UTC [2425] LOG:  database system is ready to accept connections
+2026-03-04 01:30:03.824 UTC [2432] LOG:  checkpoint starting: time
+2026-03-04 01:31:59.968 UTC [2432] LOG:  checkpoint complete: wrote 18 buffers (0.1%); 0 WAL file(s) added, 0 removed, 1 recycled; write=116.134 s, sync=0.004 s, total=116.145 s; sync files=10, longest=0.003 s, average=0.001 s; distance=9524 kB, estimate=9524 kB
+2026-03-04 01:35:04.068 UTC [2432] LOG:  checkpoint starting: time
+2026-03-04 01:35:07.892 UTC [2432] LOG:  checkpoint complete: wrote 39 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.811 s, sync=0.008 s, total=3.824 s; sync files=13, longest=0.007 s, average=0.001 s; distance=406 kB, estimate=8612 kB
+2026-03-04 01:40:04.977 UTC [2432] LOG:  checkpoint starting: time
+2026-03-04 01:40:07.394 UTC [2432] LOG:  checkpoint complete: wrote 25 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.406 s, sync=0.006 s, total=2.418 s; sync files=11, longest=0.005 s, average=0.001 s; distance=134 kB, estimate=7764 kB
+2026-03-04 07:04:33.079 UTC [1073] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-04 07:04:33.080 UTC [1073] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-04 07:04:33.080 UTC [1073] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-04 07:04:33.083 UTC [1073] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-03-04 07:04:33.092 UTC [1089] LOG:  database system was interrupted; last known up at 2026-03-04 01:40:07 UTC
+2026-03-04 07:04:33.256 UTC [1089] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-03-04 07:04:33.259 UTC [1089] LOG:  redo starts at 0/3222160
+2026-03-04 07:04:33.260 UTC [1089] LOG:  invalid record length at 0/3222248: wanted 24, got 0
+2026-03-04 07:04:33.260 UTC [1089] LOG:  redo done at 0/3222210 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-03-04 07:04:33.264 UTC [1087] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-03-04 07:04:33.270 UTC [1087] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.008 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-03-04 07:04:33.276 UTC [1073] LOG:  database system is ready to accept connections
+2026-03-04 08:41:27.964 UTC [959] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-04 08:41:27.965 UTC [959] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-04 08:41:27.965 UTC [959] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-04 08:41:27.967 UTC [959] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-03-04 08:41:27.975 UTC [962] LOG:  database system was interrupted; last known up at 2026-03-04 07:04:33 UTC
+2026-03-04 08:41:28.052 UTC [962] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-03-04 08:41:28.056 UTC [962] LOG:  redo starts at 0/32222C0
+2026-03-04 08:41:28.056 UTC [962] LOG:  invalid record length at 0/32222F8: wanted 24, got 0
+2026-03-04 08:41:28.056 UTC [962] LOG:  redo done at 0/32222C0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-03-04 08:41:28.062 UTC [960] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-03-04 08:41:28.070 UTC [960] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.010 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-03-04 08:41:28.074 UTC [959] LOG:  database system is ready to accept connections
+2026-03-04 09:01:28.423 UTC [960] LOG:  checkpoint starting: time
+2026-03-04 09:01:29.636 UTC [960] LOG:  checkpoint complete: wrote 13 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.204 s, sync=0.004 s, total=1.214 s; sync files=7, longest=0.004 s, average=0.001 s; distance=57 kB, estimate=57 kB
+2026-03-04 09:06:28.732 UTC [960] LOG:  checkpoint starting: time
+2026-03-04 09:06:29.241 UTC [960] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.502 s, sync=0.003 s, total=0.509 s; sync files=6, longest=0.002 s, average=0.001 s; distance=9 kB, estimate=52 kB
+2026-03-04 09:11:28.334 UTC [960] LOG:  checkpoint starting: time
+2026-03-04 09:11:28.542 UTC [960] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.202 s, sync=0.002 s, total=0.209 s; sync files=3, longest=0.002 s, average=0.001 s; distance=6 kB, estimate=48 kB
+2026-03-04 09:16:28.634 UTC [960] LOG:  checkpoint starting: time
+2026-03-04 09:16:28.846 UTC [960] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.203 s, sync=0.004 s, total=0.212 s; sync files=3, longest=0.003 s, average=0.002 s; distance=6 kB, estimate=43 kB
+2026-03-04 09:31:29.112 UTC [960] LOG:  checkpoint starting: time
+2026-03-04 09:31:33.634 UTC [960] LOG:  checkpoint complete: wrote 46 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.511 s, sync=0.007 s, total=4.523 s; sync files=5, longest=0.006 s, average=0.002 s; distance=345 kB, estimate=345 kB
+2026-03-08 12:04:01.464 UTC [488] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-08 12:04:01.470 UTC [488] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-08 12:04:01.470 UTC [488] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-08 12:04:01.507 UTC [488] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-03-08 12:04:01.526 UTC [503] LOG:  database system was interrupted; last known up at 2026-03-04 09:31:33 UTC
+2026-03-08 12:04:01.829 UTC [503] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-03-08 12:04:01.909 UTC [503] LOG:  redo starts at 0/328CA98
+2026-03-08 12:04:01.910 UTC [503] LOG:  invalid record length at 0/328CB80: wanted 24, got 0
+2026-03-08 12:04:01.910 UTC [503] LOG:  redo done at 0/328CB48 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.05 s
+2026-03-08 12:04:01.952 UTC [501] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-03-08 12:04:02.000 UTC [501] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.006 s, total=0.059 s; sync files=2, longest=0.005 s, average=0.003 s; distance=0 kB, estimate=0 kB
+2026-03-08 12:04:02.029 UTC [488] LOG:  database system is ready to accept connections
+2026-03-08 12:04:28.426 UTC [1106] LOG:  invalid length of startup packet
+2026-03-08 12:04:28.442 UTC [1107] LOG:  invalid length of startup packet
+2026-03-08 12:04:28.457 UTC [1108] LOG:  invalid length of startup packet
+2026-03-08 12:04:28.471 UTC [1109] LOG:  invalid length of startup packet
+2026-03-08 12:09:01.049 UTC [501] LOG:  checkpoint starting: time
+2026-03-08 12:09:03.284 UTC [501] LOG:  checkpoint complete: wrote 23 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.207 s, sync=0.022 s, total=2.235 s; sync files=7, longest=0.022 s, average=0.004 s; distance=144 kB, estimate=144 kB
+2026-03-08 12:14:01.373 UTC [501] LOG:  checkpoint starting: time
+2026-03-08 12:14:03.391 UTC [501] LOG:  checkpoint complete: wrote 21 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.008 s, sync=0.005 s, total=2.019 s; sync files=7, longest=0.004 s, average=0.001 s; distance=131 kB, estimate=143 kB
+2026-03-08 12:19:01.491 UTC [501] LOG:  checkpoint starting: time
+2026-03-08 12:19:01.705 UTC [501] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.201 s, sync=0.002 s, total=0.215 s; sync files=2, longest=0.002 s, average=0.001 s; distance=6 kB, estimate=129 kB
+2026-03-08 12:52:47.278 UTC [20735] FATAL:  lock file "postmaster.pid" already exists
+2026-03-08 12:52:47.278 UTC [20735] HINT:  Is another postmaster (PID 488) running in data directory "/workspaces/JPEG-BOOKING/local_db"?
+2026-03-08 12:52:57.184 UTC [20831] FATAL:  lock file "postmaster.pid" already exists
+2026-03-08 12:52:57.184 UTC [20831] HINT:  Is another postmaster (PID 488) running in data directory "/workspaces/JPEG-BOOKING/local_db"?
+2026-03-08 12:53:03.525 UTC [20905] FATAL:  lock file "postmaster.pid" already exists
+2026-03-08 12:53:03.525 UTC [20905] HINT:  Is another postmaster (PID 488) running in data directory "/workspaces/JPEG-BOOKING/local_db"?
+2026-03-08 13:17:41.277 UTC [31343] ERROR:  relation "page_views" does not exist at character 38
+2026-03-08 13:17:41.277 UTC [31343] STATEMENT:  SELECT COUNT(id) AS total_views FROM page_views
+2026-03-08 13:17:41.279 UTC [31344] ERROR:  relation "page_views" does not exist at character 54
+2026-03-08 13:17:41.279 UTC [31344] STATEMENT:  SELECT device_type AS label, COUNT(id) AS count FROM page_views GROUP BY device_type
+2026-03-08 13:17:41.278 UTC [31345] ERROR:  column "ticket_type" does not exist at character 8
+2026-03-08 13:17:41.278 UTC [31345] STATEMENT:  SELECT ticket_type AS label, COUNT(id) AS count FROM bookings GROUP BY ticket_type
+2026-03-08 13:17:53.169 UTC [31425] ERROR:  relation "page_views" does not exist at character 38
+2026-03-08 13:17:53.169 UTC [31425] STATEMENT:  SELECT COUNT(id) AS total_views FROM page_views
+2026-03-08 13:17:53.172 UTC [31426] ERROR:  relation "page_views" does not exist at character 54
+2026-03-08 13:17:53.172 UTC [31426] STATEMENT:  SELECT device_type AS label, COUNT(id) AS count FROM page_views GROUP BY device_type
+2026-03-08 13:17:53.173 UTC [31427] ERROR:  column "ticket_type" does not exist at character 8
+2026-03-08 13:17:53.173 UTC [31427] STATEMENT:  SELECT ticket_type AS label, COUNT(id) AS count FROM bookings GROUP BY ticket_type
+2026-03-08 13:20:21.559 UTC [32361] FATAL:  lock file "postmaster.pid" already exists
+2026-03-08 13:20:21.559 UTC [32361] HINT:  Is another postmaster (PID 488) running in data directory "/workspaces/JPEG-BOOKING/local_db"?
+2026-03-08 13:21:46.043 UTC [34313] FATAL:  lock file "postmaster.pid" already exists
+2026-03-08 13:21:46.043 UTC [34313] HINT:  Is another postmaster (PID 488) running in data directory "/workspaces/JPEG-BOOKING/local_db"?
+2026-03-08 13:22:11.786 UTC [34563] FATAL:  role "postgres" does not exist
+2026-03-08 13:22:58.641 UTC [35026] FATAL:  lock file "postmaster.pid" already exists
+2026-03-08 13:22:58.641 UTC [35026] HINT:  Is another postmaster (PID 488) running in data directory "/workspaces/JPEG-BOOKING/local_db"?
+2026-03-08 13:39:03.000 UTC [501] LOG:  checkpoint starting: time
+2026-03-08 13:39:03.516 UTC [501] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.503 s, sync=0.003 s, total=0.517 s; sync files=6, longest=0.003 s, average=0.001 s; distance=10 kB, estimate=117 kB
+2026-03-08 14:09:03.007 UTC [501] LOG:  checkpoint starting: time
+2026-03-08 14:09:06.833 UTC [501] LOG:  checkpoint complete: wrote 39 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.811 s, sync=0.009 s, total=3.826 s; sync files=35, longest=0.008 s, average=0.001 s; distance=166 kB, estimate=166 kB
+2026-03-08 14:14:03.927 UTC [501] LOG:  checkpoint starting: time
+2026-03-08 14:14:04.035 UTC [501] LOG:  checkpoint complete: wrote 1 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.101 s, sync=0.001 s, total=0.108 s; sync files=1, longest=0.001 s, average=0.001 s; distance=7 kB, estimate=150 kB
+2026-03-10 01:32:21.536 UTC [1453] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-03-10 01:32:21.601 UTC [1453] LOG:  listening on IPv6 address "::1", port 5432
+2026-03-10 01:32:21.601 UTC [1453] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-03-10 01:32:21.605 UTC [1453] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-03-10 01:32:21.615 UTC [1461] LOG:  database system was interrupted; last known up at 2026-03-08 14:14:04 UTC
+2026-03-10 01:32:21.830 UTC [1461] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-03-10 01:32:21.866 UTC [1461] LOG:  redo starts at 0/3301778
+2026-03-10 01:32:21.866 UTC [1461] LOG:  invalid record length at 0/3301860: wanted 24, got 0
+2026-03-10 01:32:21.866 UTC [1461] LOG:  redo done at 0/3301828 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-03-10 01:32:21.872 UTC [1459] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-03-10 01:32:21.881 UTC [1459] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.011 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-03-10 01:32:21.886 UTC [1453] LOG:  database system is ready to accept connections
+2026-03-10 01:42:22.074 UTC [1459] LOG:  checkpoint starting: time
+2026-03-10 01:42:22.986 UTC [1459] LOG:  checkpoint complete: wrote 10 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.903 s, sync=0.004 s, total=0.913 s; sync files=10, longest=0.003 s, average=0.001 s; distance=2 kB, estimate=2 kB
+2026-04-07 13:35:07.412 UTC [1257] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-04-07 13:35:07.514 UTC [1257] LOG:  listening on IPv6 address "::1", port 5432
+2026-04-07 13:35:07.514 UTC [1257] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-04-07 13:35:07.517 UTC [1257] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-04-07 13:35:07.523 UTC [1260] LOG:  database system was interrupted; last known up at 2026-03-10 01:42:22 UTC
+2026-04-07 13:35:07.708 UTC [1260] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-04-07 13:35:07.712 UTC [1260] LOG:  redo starts at 0/3302098
+2026-04-07 13:35:07.712 UTC [1260] LOG:  invalid record length at 0/3302180: wanted 24, got 0
+2026-04-07 13:35:07.712 UTC [1260] LOG:  redo done at 0/3302148 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-04-07 13:35:07.716 UTC [1258] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-04-07 13:35:07.724 UTC [1258] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.010 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-04-07 13:35:07.729 UTC [1257] LOG:  database system is ready to accept connections
+2026-04-07 13:35:14.116 UTC [1372] LOG:  invalid length of startup packet
+2026-04-07 13:35:14.130 UTC [1373] LOG:  invalid length of startup packet
+2026-04-07 13:35:14.142 UTC [1374] LOG:  invalid length of startup packet
+2026-04-07 13:35:14.156 UTC [1375] LOG:  invalid length of startup packet
+2026-04-07 13:35:19.275 UTC [1399] LOG:  invalid length of startup packet
+2026-04-07 13:35:19.288 UTC [1400] LOG:  invalid length of startup packet
+2026-04-07 13:35:19.301 UTC [1401] LOG:  invalid length of startup packet
+2026-04-07 13:35:19.313 UTC [1402] LOG:  invalid length of startup packet
+2026-04-07 13:40:07.797 UTC [1258] LOG:  checkpoint starting: time
+2026-04-07 13:40:08.408 UTC [1258] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.603 s, sync=0.003 s, total=0.612 s; sync files=7, longest=0.003 s, average=0.001 s; distance=10 kB, estimate=10 kB
+2026-04-08 07:28:17.771 UTC [1522] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-04-08 07:28:17.772 UTC [1522] LOG:  listening on IPv6 address "::1", port 5432
+2026-04-08 07:28:17.772 UTC [1522] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-04-08 07:28:17.786 UTC [1522] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-04-08 07:28:17.810 UTC [1525] LOG:  database system was interrupted; last known up at 2026-04-07 13:40:08 UTC
+2026-04-08 07:28:17.896 UTC [1525] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-04-08 07:28:17.944 UTC [1525] LOG:  redo starts at 0/3304C90
+2026-04-08 07:28:17.944 UTC [1525] LOG:  invalid record length at 0/3304D78: wanted 24, got 0
+2026-04-08 07:28:17.944 UTC [1525] LOG:  redo done at 0/3304D40 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-04-08 07:28:17.949 UTC [1523] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-04-08 07:28:17.958 UTC [1523] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.010 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-04-08 07:28:17.962 UTC [1522] LOG:  database system is ready to accept connections
+2026-04-08 07:28:41.254 UTC [1721] LOG:  invalid length of startup packet
+2026-04-08 07:28:41.271 UTC [1722] LOG:  invalid length of startup packet
+2026-04-08 07:28:41.293 UTC [1725] LOG:  invalid length of startup packet
+2026-04-08 07:28:41.319 UTC [1727] LOG:  invalid length of startup packet
+2026-04-29 07:19:30.226 UTC [2140] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-04-29 07:19:30.227 UTC [2140] LOG:  listening on IPv6 address "::1", port 5432
+2026-04-29 07:19:30.227 UTC [2140] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-04-29 07:19:30.231 UTC [2140] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-04-29 07:19:30.241 UTC [2143] LOG:  database system was interrupted; last known up at 2026-04-08 07:28:17 UTC
+2026-04-29 07:19:30.323 UTC [2143] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-04-29 07:19:30.327 UTC [2143] LOG:  redo starts at 0/3304DF0
+2026-04-29 07:19:30.327 UTC [2143] LOG:  invalid record length at 0/3304E28: wanted 24, got 0
+2026-04-29 07:19:30.327 UTC [2143] LOG:  redo done at 0/3304DF0 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-04-29 07:19:30.331 UTC [2141] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-04-29 07:19:30.341 UTC [2141] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.003 s, sync=0.001 s, total=0.012 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-04-29 07:19:30.345 UTC [2140] LOG:  database system is ready to accept connections
+2026-04-29 07:29:30.508 UTC [2141] LOG:  checkpoint starting: time
+2026-04-29 07:29:32.327 UTC [2141] LOG:  checkpoint complete: wrote 19 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.810 s, sync=0.005 s, total=1.819 s; sync files=11, longest=0.004 s, average=0.001 s; distance=86 kB, estimate=86 kB
+2026-04-29 07:31:44.586 UTC [8182] FATAL:  role "postgres" does not exist
+2026-04-29 07:32:51.627 UTC [8874] FATAL:  database "node" does not exist
+2026-04-29 07:33:02.730 UTC [9011] FATAL:  role "vscode" does not exist
+2026-04-29 07:39:30.513 UTC [2141] LOG:  checkpoint starting: time
+2026-04-29 07:39:33.734 UTC [2141] LOG:  checkpoint complete: wrote 33 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.209 s, sync=0.007 s, total=3.222 s; sync files=13, longest=0.006 s, average=0.001 s; distance=19 kB, estimate=80 kB
+2026-04-29 07:44:30.830 UTC [2141] LOG:  checkpoint starting: time
+2026-04-29 07:44:33.148 UTC [2141] LOG:  checkpoint complete: wrote 24 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.306 s, sync=0.007 s, total=2.318 s; sync files=11, longest=0.005 s, average=0.001 s; distance=134 kB, estimate=134 kB
+2026-04-29 08:04:30.374 UTC [2141] LOG:  checkpoint starting: time
+2026-04-29 08:04:31.991 UTC [2141] LOG:  checkpoint complete: wrote 17 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.606 s, sync=0.005 s, total=1.617 s; sync files=12, longest=0.004 s, average=0.001 s; distance=58 kB, estimate=126 kB
+2026-04-29 08:09:31.091 UTC [2141] LOG:  checkpoint starting: time
+2026-04-29 08:09:31.602 UTC [2141] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.503 s, sync=0.003 s, total=0.512 s; sync files=6, longest=0.003 s, average=0.001 s; distance=12 kB, estimate=115 kB
+2026-04-29 08:14:31.654 UTC [2141] LOG:  checkpoint starting: time
+2026-04-29 08:14:37.280 UTC [2141] LOG:  checkpoint complete: wrote 57 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=5.616 s, sync=0.005 s, total=5.627 s; sync files=18, longest=0.004 s, average=0.001 s; distance=343 kB, estimate=343 kB
+2026-04-29 09:13:12.484 UTC [3206] LOG:  starting PostgreSQL 15.16 (Debian 15.16-0+deb12u1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-04-29 09:13:12.486 UTC [3206] LOG:  listening on IPv6 address "::1", port 5432
+2026-04-29 09:13:12.486 UTC [3206] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2026-04-29 09:13:12.489 UTC [3206] LOG:  listening on Unix socket "/workspaces/JPEG-BOOKING/local_db/.s.PGSQL.5432"
+2026-04-29 09:13:12.497 UTC [3209] LOG:  database system was interrupted; last known up at 2026-04-29 08:14:37 UTC
+2026-04-29 09:13:12.588 UTC [3209] LOG:  database system was not properly shut down; automatic recovery in progress
+2026-04-29 09:13:12.592 UTC [3209] LOG:  redo starts at 0/33A8B08
+2026-04-29 09:13:12.592 UTC [3209] LOG:  invalid record length at 0/33A8BF0: wanted 24, got 0
+2026-04-29 09:13:12.592 UTC [3209] LOG:  redo done at 0/33A8BB8 system usage: CPU: user: 0.00 s, system: 0.00 s, elapsed: 0.00 s
+2026-04-29 09:13:12.596 UTC [3207] LOG:  checkpoint starting: end-of-recovery immediate wait
+2026-04-29 09:13:12.604 UTC [3207] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.009 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+2026-04-29 09:13:12.610 UTC [3206] LOG:  database system is ready to accept connections
+2026-04-29 09:18:12.704 UTC [3207] LOG:  checkpoint starting: time
+2026-04-29 09:18:13.424 UTC [3207] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.704 s, sync=0.009 s, total=0.721 s; sync files=8, longest=0.007 s, average=0.002 s; distance=10 kB, estimate=10 kB
+2026-04-29 09:33:12.711 UTC [3207] LOG:  checkpoint starting: time
+2026-04-29 09:33:13.350 UTC [3207] LOG:  checkpoint complete: wrote 7 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.605 s, sync=0.010 s, total=0.639 s; sync files=7, longest=0.008 s, average=0.002 s; distance=6 kB, estimate=10 kB
+2026-04-29 09:38:12.451 UTC [3207] LOG:  checkpoint starting: time
+2026-04-29 09:38:13.264 UTC [3207] LOG:  checkpoint complete: wrote 9 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.803 s, sync=0.004 s, total=0.813 s; sync files=7, longest=0.003 s, average=0.001 s; distance=7 kB, estimate=9 kB
+2026-04-29 09:43:12.339 UTC [3207] LOG:  checkpoint starting: time
+2026-04-29 09:43:14.157 UTC [3207] LOG:  checkpoint complete: wrote 19 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.806 s, sync=0.005 s, total=1.818 s; sync files=12, longest=0.004 s, average=0.001 s; distance=77 kB, estimate=77 kB

@@ -1,0 +1,190 @@
+:root {
+  --profile-card-bg: linear-gradient(145deg, #1b162a, #251e3c);
+  --profile-info-border: rgba(255, 255, 255, 0.15);
+  --modal-overlay: rgba(0, 0, 0, 0.75);
+  --profile-shadow: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] {
+  --profile-card-bg: linear-gradient(145deg, #ffffff, #f4f4f4);
+  --profile-info-border: rgba(0, 0, 0, 0.1);
+  --modal-overlay: rgba(0, 0, 0, 0.4);
+  --profile-shadow: rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   GLOBAL PROFILE AVATAR (TOPBAR)
+========================= */
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: var(--accent); /* Now uses global accent */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff; /* Icons/Initials stay white for contrast */
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--profile-shadow);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px var(--profile-shadow);
+}
+
+/* =========================
+   PROFILE MODAL OVERLAY
+========================= */
+#profileModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--modal-overlay);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px); /* Modern touch */
+}
+
+/* =========================
+   PROFILE CARD
+========================= */
+.profile-modal-card {
+  width: 480px;
+  max-width: 95%;
+  background: var(--profile-card-bg);
+  border-radius: 20px;
+  padding: 60px 35px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 15px 35px var(--profile-shadow);
+  animation: profileFadeIn 0.35s ease-out;
+  font-family: 'Jockey One', sans-serif;
+  color: var(--text-main); /* Swaps black/white automatically */
+}
+
+@keyframes profileFadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================
+   BIG PROFILE AVATAR
+========================= */
+.profile-avatar-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  margin-top: -80px;
+  border: 5px solid var(--bg-card); /* Creates the "cutout" effect */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.profile-avatar-preview:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px var(--profile-shadow);
+}
+
+.profile-avatar-preview::after {
+  content: "Change";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.profile-avatar-preview:hover::after { opacity: 1; }
+
+/* =========================
+   PROFILE INFO TEXT
+========================= */
+#profileName,
+#profileEmail {
+  font-size: 18px;
+  color: var(--text-main);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--profile-info-border);
+  padding: 12px 0;
+  letter-spacing: 0.5px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.profile-actions button {
+  padding: 10px 26px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.2s;
+  letter-spacing: 0.5px;
+}
+
+/* CLOSE BUTTON */
+#closeProfileBtn {
+  background: var(--bg-sidebar); /* Matches theme sidebar */
+  color: var(--text-main);
+}
+
+#closeProfileBtn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* SAVE BUTTON (If applicable) */
+#saveProfileBtn {
+  background: #0026ff;
+  color: #fff;
+}
+
+#saveProfileBtn:hover {
+  background: #2402bb;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+  background: rgb(145, 0, 0);
+  color: #fff;
+}
+
+.logout-btn:hover {
+  background: rgb(68, 0, 0);
+  transform: scale(1.05);
+}

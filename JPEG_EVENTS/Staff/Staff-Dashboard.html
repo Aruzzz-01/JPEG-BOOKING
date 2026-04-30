@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JPEG Events – Staff Dashboard</title>
+  <script src="../Global/auth-util.js"></script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="../Global/Theme.js"></script>
+  <link rel="stylesheet" href="staff.css" />
+  <link rel="stylesheet" href="../Global/profile.css"/>
+</head>
+<body>
+
+  <header class="topbar">
+
+  <div class="topbar-title">
+    <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
+    <span>JPEG EVENTS</span>
+  </div>
+
+  <div class="user-info" id="userInfo">
+
+    <span id="usernameDisplay"></span>
+
+    <!-- clickable avatar -->
+    <div class="avatar" id="avatarBtn"></div>
+
+  </div>
+
+</header>
+
+  <div class="container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="menu-item active">
+        <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"></img>
+        <a href="Staff-Dashboard.html" class="Side-Items">Tickets</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
+        <a href="Staff-Settings.html" class="Side-Items">Settings</a>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="staff-panel">
+
+  <h1 class="staff-title">STAFF PANEL</h1>
+
+  <!-- SELECT EVENT -->
+  <div class="staff-card">
+    <label>Select Event</label>
+    <select id="eventSelect">
+      <option value="">Loading events...</option>
+    </select>
+  </div>
+
+
+  <!-- SCAN TICKET -->
+  <div class="staff-card">
+
+    <h2>Scan Ticket</h2>
+
+    <div id="cameraArea">
+      <video id="cameraPreview"></video>
+    </div>
+
+    <div class="result-box">
+
+      <div>Name: <span id="resultName">-</span></div>
+
+      <div>Ticket ID: <span id="resultTicket">-</span></div>
+
+      <div>Status: <span id="resultStatus">Waiting</span></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ATTENDANCE -->
+  <div class="staff-card">
+
+    <h2>Attendance</h2>
+
+    <div class="attendance-text">
+      Checked-in:
+      <span id="checkedCount">0</span>
+      /
+      <span id="totalCount">0</span>
+    </div>
+
+  </div>
+
+
+  <!-- SEARCH -->
+  <div class="staff-card">
+
+    <h2>Search Ticket</h2>
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Enter Ticket ID"
+    >
+    <button id="searchBtn">Search</button>
+    <div id="searchResult"></div>
+
+  </div>
+
+
+  <!-- RECENT -->
+  <div class="staff-card">
+
+    <h2>Recent Check-ins</h2>
+
+    <div id="recentList">
+
+      No check-ins yet
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+</div>
+
+
+
+    </div>
+      <!-- ========================= -->
+<!-- PROFILE MODAL -->
+<!-- ========================= -->
+
+<div class="modal" id="profileModal">
+
+  <div class="modal-overlay"></div>
+
+  <div class="profile-modal-card">
+
+
+    <!-- avatar preview -->
+    <div
+  class="profile-avatar-preview"
+  id="profileAvatarPreview">
+</div>
+
+<input
+  type="file"
+  id="profileImageInput"
+  accept="image/*"
+  style="display:none"
+/>
+
+
+
+    <p id="profileName">Loading...</p>
+    <p id="profileEmail">Loading...</p>
+
+
+
+    <div class="profile-actions">
+
+      <button id="saveProfileBtn">
+        Save
+      </button>
+
+      <button id="closeProfileBtn">
+        Close
+      </button>
+
+      <button id="logoutBtn" class="logout-btn">
+        Logout
+      </button>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+  <!-- STAFF JS -->
+  <script src="Staff.js"></script>
+  <script src="../Global/profile.js"></script>
+</body>
+</html>

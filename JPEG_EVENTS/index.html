@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPEG Events</title>
+    <link rel="stylesheet" href="style-landingPage.css">
+</head>
+<body>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+    <div class="modal">
+        <button class="close-btn" id="closeModal">X</button>
+
+        <h2 class="modal-title">User Login</h2>
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email">
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password">
+
+        <button class="login-btn-1">Log in</button>
+        <button class="create-btn">Create Account</button>
+
+        <div class="modal-links">
+            <span class="toggle-link">Log in as Admin</span>
+            <span class="forgot-link">Forgot password?</span>
+        </div>
+    </div>
+</div>
+<!-- CREATE ACCOUNT MODAL -->
+<div class="modal-overlay" id="createModal">
+    <div class="modal">
+        <button class="close-btn" id="closeCreateModal">X</button>
+
+        <h2 class="modal-title">Create Account</h2>
+
+        <label>First Name</label>
+        <input type="text" id="firstName" placeholder="Enter your first name">
+
+        <label>Last Name</label>
+        <input type="text" id="lastName" placeholder="Enter your last name">
+
+        <label>Email</label>
+        <input type="email" id="createEmail" placeholder="Enter your email">
+
+        <label>Password</label>
+        <input type="password" id="createPassword" placeholder="Enter your password">
+
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password">
+
+        <button id="submitCreate" class="create-btn submitCreate">Create Account</button>
+        <span class="back-to-login">Back to Login</span>
+    </div>
+</div>
+
+
+<nav class="navbar">
+    <button class="login-btn">Log in</button>
+</nav>
+
+<section class="hero">
+    <h1 class="title">JPEG EVENTS</h1>
+
+    <div class="image-row">
+        <img src="Images/Image-3.png" style="height:50vh;">
+        <img src="Images/Image-2.png" style="height:55vh;">
+        <img src="Images/Image-1.png" style="height:50vh;">
+    </div>
+
+    <h2 class="tagline">Experience the moment. Capture the memory.</h2>
+
+    <p class="description">
+        Your gateway to unforgettable experiences, powered by JPEG Events. From electrifying concerts to once-in-a-lifetime celebrations, we bring every moment closer to you. One ticket opens the door to infinite memories; moments you will feel, live, and never forget. Experience the moment. Capture the memory. Discover events that move you, inspire you, and stay with you long after the lights fade. Book with confidence. Book with JPEG Events.
+    </p>
+</section>
+
+<script src="script-landingPage-Database.js"></script>
+</body>
+</html>

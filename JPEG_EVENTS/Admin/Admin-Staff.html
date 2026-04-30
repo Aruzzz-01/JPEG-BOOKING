@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JPEG Events – Admin Dashboard</title>
+  <script src="../Global/auth-util.js"></script>
+  <script src="../Global/Theme.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../Global/profile.css" />
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div class="topbar-title">
+      <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
+      <span>JPEG EVENTS</span>
+    </div>
+
+    <div class="user-info" id="userInfo">
+
+      <span id="usernameDisplay"></span>
+
+      <!-- clickable avatar -->
+      <div class="avatar" id="avatarBtn"></div>
+
+    </div>
+
+  </header>
+
+  <div class="container">
+
+    <aside class="sidebar">
+      <div class="menu-item">
+        <img src="../Images/Ticket.png" class="icons" alt="Events"></img>
+        <a href="Admin-Events.html" class="Side-Items">Events</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Dashboard.html" class="Side-Items">Dashboard</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Analytics.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Analytics.html" class="Side-Items">Analytics</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
+        <a href="Admin-Setting.html" class="Side-Items">Settings</a>
+      </div>
+      <div class="menu-item active">    
+        <img src="../Images/Profile.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Staff.html" class="Side-Items">Staff</a>
+      </div>
+    </aside>
+
+    <div class="main">
+      <input type="text" id="staffSearch" placeholder="Search by name or email..." 
+             style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #3a2a55; color: white; margin-bottom: 20px; font-size: 18px;">
+
+      <div id="staffContainer" class="staff-container">
+        </div>
+
+      <div class="modal" id="addStaffModal">
+        <div class="modal-content">
+          <h2>Create New Account</h2>
+          <form id="addStaffForm">
+            <input type="text" id="staffFirstName" placeholder="First Name" required />
+            <input type="text" id="staffLastName" placeholder="Last Name" required />
+            <input type="email" id="staffEmail" placeholder="Email Address" required />
+            <input type="password" id="staffPassword" placeholder="Password" required />
+            
+            <label style="display:block; margin-bottom: 5px; opacity: 0.8;">Account Type:</label>
+            <select id="staffRole" style="width: 100%; margin-bottom: 12px; padding: 8px; border-radius: 8px; background: #e6e6e6; border: none; font-size: large; color: #000;">
+              <option value="staff">Staff (Scanner Only)</option>
+              <option value="admin">Admin (Full Access)</option>
+            </select>
+
+            <div class="modal-actions">
+              <button type="button" id="closeAddStaffBtn">Cancel</button>
+              <button type="submit">Create</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div> </div> <button class="add-btn">+</button>
+    <!-- ========================= -->
+  <!-- PROFILE MODAL -->
+  <!-- ========================= -->
+
+  <div class="modal" id="profileModal">
+
+    <div class="modal-overlay"></div>
+
+    <div class="profile-modal-card">
+
+
+      <!-- avatar preview -->
+      <div
+    class="profile-avatar-preview"
+    id="profileAvatarPreview">
+  </div>
+
+  <input
+    type="file"
+    id="profileImageInput"
+    accept="image/*"
+    style="display:none"
+  />
+
+
+
+      <p id="profileName">Loading...</p>
+      <p id="profileEmail">Loading...</p>
+
+
+
+      <div class="profile-actions">
+
+        <button id="saveProfileBtn">
+          Save
+        </button>
+
+        <button id="closeProfileBtn">
+          Close
+        </button>
+
+        <button id="logoutBtn" class="logout-btn">
+          Logout
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+    </div>
+  </div>
+
+  <script src="Staff.js"></script>
+  <script src="../Global/profile.js"></script>
+</body>
+</html>

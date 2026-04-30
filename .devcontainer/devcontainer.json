@@ -1,0 +1,5 @@
+{
+  "name": "Node & Postgres",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "forwardPorts": [3000, 5432]
+}

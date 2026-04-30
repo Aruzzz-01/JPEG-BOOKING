@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Jockey+One&display=swap");
+
+/* =========================
+   THEME VARIABLES
+========================= */
+:root {
+  --bg-main: #22192C;
+  --bg-sidebar: #2C2336;
+  --bg-card: #3a2a55;
+  --bg-modal: #3a2a55;
+  --bg-input: #e6e6e6;
+
+  --text-main: #ffffff;
+  --text-muted: #bbb;
+  --text-accent: #a88cff;
+
+  --accent: #6a5acd;
+  --accent-hover: #5a4abd;
+  --accent-secondary: #8b73c7;
+
+  --danger: #ff3b3b;
+  --danger-hover: #ff1a1a;
+
+  --radius: 16px;
+  --radius-small: 8px;
+  --logo-filter: brightness(0) invert(1);
+}
+
+[data-theme="light"] {
+  --bg-main: #f4f4f4;
+  --bg-sidebar: #ffe5fe;
+  --bg-card: #ffffff;
+  --bg-modal: #ffffff;
+
+  --text-main: #111;
+  --text-muted: #555;
+
+  --accent: #4a3acd;
+  --accent-hover: #3729a8;
+  --logo-filter: brightness(0);
+}
+
+/* =========================
+   RESET & BASE
+========================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Jockey One", sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1c1428, #120c1d);
+  color: var(--text-main);
+}
+
+::-webkit-scrollbar { display: none; }
+html { scrollbar-width: none; }
+
+/* =========================
+   TOPBAR
+========================= */
+.topbar {
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-sidebar);
+  z-index: 10;
+}
+
+.topbar-title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  background-size: cover;
+}
+.icons {
+  filter: var(--logo-filter);
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.menu-item:hover .icons {
+  transform: translateX(4px);
+}
+.menu-item.active .icons {
+  filter: var(--logo-filter) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+  transform: translateX(4px);
+}
+#themeSelect, #eventSelect{
+color: #111;
+}
+
+
+/* =========================
+   LAYOUT & SIDEBAR
+========================= */
+.container {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.sidebar {
+  width: 220px;
+  padding-top: 10px;
+  background: var(--bg-sidebar);
+}
+
+.sidebar-logo {
+  width: 26px;
+  filter: var(--logo-filter);
+  transform: rotate(-130deg);
+}
+
+.menu-item {
+  padding: 12px 16px;
+  margin: 6px 10px;
+  border-radius: var(--radius-small);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.menu-item.active {
+  background: var(--bg-card);
+  box-shadow: inset 4px 0 0 #fff;
+}
+
+.Side-Items {
+  color: var(--text-main);
+  text-decoration: none;
+  display: block;
+}
+
+.main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  background: var(--bg-main);
+}
+
+/* =========================
+   STAFF PANEL & CARDS
+========================= */
+.staff-card {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.staff-title {
+    text-align: center;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+#cameraArea {
+  width: 300px;
+  height: 300px;
+  background: black;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin: 15px 0;
+}
+
+#cameraArea video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.result-box {
+  padding: 15px;
+  background: var(--bg-main);
+  border-radius: 8px;
+  width: 100%;
+  line-height: 1.6;
+}
+
+/* =========================
+   INPUTS & BUTTONS
+========================= */
+input[type="text"], select {
+  padding: 10px 12px;
+  border-radius: var(--radius-small);
+  border: none;
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: var(--radius-small);
+  border: none;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover { background: var(--accent-hover); }
+
+/* =========================
+   SETTINGS (Accordion)
+========================= */
+.settings-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settings-category {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-sidebar);
+}
+
+.settings-header {
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.settings-content {
+  max-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px;
+  transition: all 0.3s ease;
+}
+
+.settings-category.open .settings-content {
+  max-height: 500px;
+  padding: 16px;
+}
+
+.settings-category.open .arrow { transform: rotate(180deg); }
+
+#previewArea {
+  border-radius: var(--radius-small);
+  padding: 15px;
+  background: var(--bg-card);
+  border: 1px dashed var(--accent);
+  margin-top: 10px;
+}

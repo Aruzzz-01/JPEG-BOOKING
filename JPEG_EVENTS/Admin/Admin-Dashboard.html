@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPEG Events – Ticket Analytics</title>
+  <script src="../Global/auth-util.js"></script>
+  <script src="../Global/Theme.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../Global/profile.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div class="topbar-title">
+      <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
+      <span>JPEG EVENTS</span>
+    </div>
+
+    <div class="user-info" id="userInfo">
+
+      <span id="usernameDisplay"></span>
+
+      <!-- clickable avatar -->
+      <div class="avatar" id="avatarBtn"></div>
+
+    </div>
+
+  </header>
+  <div class="container">
+
+    <aside class="sidebar">
+      <div class="menu-item">
+        <img src="../Images/Ticket.png" class="icons" alt="Events"></img>
+        <a href="Admin-Events.html" class="Side-Items">Events</a>
+      </div>
+      <div class="menu-item active">
+        <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Dashboard.html" class="Side-Items">Dashboard</a>
+      </div><div class="menu-item">
+        <img src="../Images/Analytics.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Analytics.html" class="Side-Items">Analytics</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
+        <a href="Admin-Setting.html" class="Side-Items">Settings</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Profile.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Staff.html" class="Side-Items">Staff</a>
+      </div>
+    </aside>
+
+    <div class="main">
+      
+      <div class="event-card">
+        <div class="event-left">
+          <div class="description">
+            <div style="font-size: 14px; opacity: 0.7;">TOTAL REVENUE</div>
+            <div id="total-revenue" style="font-size: 32px; color: #fff;">₱0.00</div>
+          </div>
+          <div class="divider"></div>
+          <div class="description">
+            <div style="font-size: 14px; opacity: 0.7;">TICKETS SOLD</div>
+            <div id="total-sold" style="font-size: 32px; color: #fff;">0</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="icon-btn edit" id="export-csv" title="Download Report">CSV</button>
+        </div>
+      </div>
+
+      <div class="event-card" style="display: block; min-height: 350px;">
+        <h3 style="margin-top: 0; margin-bottom: 20px;">Sales Momentum (Last 30 Days)</h3>
+        <div style="height: 250px;">
+          <canvas id="salesChart"></canvas>
+        </div>
+      </div>
+
+      <h2 style="margin: 30px 0 15px;">Event Performance</h2>
+      <div class="event-card" style="display: block; padding: 0; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="background: rgba(255,255,255,0.05);">
+              <th style="padding: 15px;">Event</th>
+              <th style="padding: 15px;">Tickets Sold</th>
+              <th style="padding: 15px;">Revenue</th>
+              <th style="padding: 15px;">Attendance</th>
+            </tr>
+          </thead>
+          <tbody id="events-table-body">
+            </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!-- ========================= -->
+  <!-- PROFILE MODAL -->
+  <!-- ========================= -->
+
+  <div class="modal" id="profileModal">
+
+    <div class="modal-overlay"></div>
+
+    <div class="profile-modal-card">
+
+
+      <!-- avatar preview -->
+      <div
+    class="profile-avatar-preview"
+    id="profileAvatarPreview">
+  </div>
+
+  <input
+    type="file"
+    id="profileImageInput"
+    accept="image/*"
+    style="display:none"
+  />
+
+
+
+      <p id="profileName">Loading...</p>
+      <p id="profileEmail">Loading...</p>
+
+
+
+      <div class="profile-actions">
+
+        <button id="saveProfileBtn">
+          Save
+        </button>
+
+        <button id="closeProfileBtn">
+          Close
+        </button>
+
+        <button id="logoutBtn" class="logout-btn">
+          Logout
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+    </div>
+  </div>
+  </div>
+
+
+  <script src="Dashboard.js"></script>
+  <script src="../Global/profile.js"></script>
+</body>
+</html>

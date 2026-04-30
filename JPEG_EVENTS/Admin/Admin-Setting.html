@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPEG Events – Settings</title>
+  <script src="../Global/auth-util.js"></script>
+  <script src="../Global/Theme.js"></script>
+  <link rel="stylesheet" href="style.css" /> 
+   <link rel="stylesheet" href="../Global/profile.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-title">
+      <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo" />
+      <span>JPEG EVENTS</span>
+    </div>
+    <div class="user-info" id="userInfo">
+      <span id="usernameDisplay"></span>
+      <div class="avatar" id="avatarBtn"></div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <aside class="sidebar">
+      <div class="menu-item">
+        <img src="../Images/Ticket.png" class="icons" alt="Events"></img>
+        <a href="Admin-Events.html" class="Side-Items">Events</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Dashboard.html" class="Side-Items">Dashboard</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Analytics.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Analytics.html" class="Side-Items">Analytics</a>
+      </div>
+      <div class="menu-item active">
+        <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
+        <a href="Admin-Setting.html" class="Side-Items">Settings</a>
+      </div>
+      <div class="menu-item">
+        <img src="../Images/Profile.png" class="icons" alt="Dashboard"></img>
+        <a href="Admin-Staff.html" class="Side-Items">Staff</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="settings-container">
+        
+        <section class="settings-category">
+          <div class="settings-header" data-target="preferencesSection">
+            Preferences <span class="arrow">▼</span>
+          </div>
+          
+          <div class="settings-content" id="preferencesSection">
+            <div class="form-group">
+              <label for="themeSelect">Theme</label>
+              <select id="themeSelect">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </div>
+
+            <div id="previewArea" class="card">
+              <h3>Preview</h3>
+              <p>This is how your theme will look.</p>
+              <button type="button">Sample Button</button>
+            </div>
+
+            <button class="save-category-btn" data-category="preferencesSection">
+              Save Preferences
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div> <div class="modal" id="profileModal">
+    <div class="modal-overlay" id="closeProfileOverlay"></div>
+    <div class="profile-modal-card">
+      <div class="profile-avatar-preview" id="profileAvatarPreview"></div>
+      
+      <input type="file" id="profileImageInput" accept="image/*" style="display:none" />
+
+      <p id="profileName" class="profile-info-name">Loading...</p>
+      <p id="profileEmail" class="profile-info-email">Loading...</p>
+
+      <div class="profile-actions">
+        <button id="saveProfileBtn">Save</button>
+        <button id="closeProfileBtn">Close</button>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Setting.js"></script>
+  <script src="../Global/profile.js"></script>
+  
+</body>
+</html>

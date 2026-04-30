@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JPEG Events – Settings</title>
+  <script src="../Global/auth-util.js"></script>
+  <script src="../Global/Theme.js"></script>
+  <link rel="stylesheet" href="User.css" />
+  <link rel="stylesheet" href="../Global/profile.css" />
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-title">
+    <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
+    JPEG EVENTS
+  </div>
+  <div class="user-info">
+    <span id="userName"></span>
+    <div class="avatar" id="avatar"></div>
+  </div>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="menu-item">
+      <img src="../Images/Dashboard.png" class="icons" alt="Events"></img>
+      <a href="User-Dashboard.html" class="Side-Items">Events</a>
+    </div>
+
+    <div class="menu-item">
+      <img src="../Images/Ticket.png" class="icons" alt="Tickets"></img>
+      <a href="User-Tickets.html" class="Side-Items">Tickets</a>
+    </div>
+
+    <div class="menu-item active">
+      <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
+      <a href="#" class="Side-Items">Settings</a>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- SETTINGS CATEGORIES -->
+    <div class="settings-container">
+
+      <!-- Profile Info -->
+      <div class="settings-category">
+        <div class="settings-header" data-target="profileInfo">
+          Profile Info <span class="arrow">▼</span>
+        </div>
+        <div class="settings-content" id="profileInfo">
+          <label>First Name</label>
+          <input type="text" id="firstName" data-original="" placeholder="Enter first name">
+          <label>Last Name</label>
+          <input type="text" id="lastName" data-original="" placeholder="Enter last name">
+          <label>Email</label>
+          <input type="email" id="email" data-original="" placeholder="Enter email">
+          <button class="save-category-btn" data-category="profileInfo">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- Password & Security -->
+      <div class="settings-category">
+        <div class="settings-header" data-target="passwordSection">
+          Password / Security <span class="arrow">▼</span>
+        </div>
+        <div class="settings-content" id="passwordSection">
+          <label>Current Password</label>
+          <input type="password" id="currentPassword" placeholder="Current password" />
+          <label>New Password</label>
+          <input type="password" id="newPassword" placeholder="New password" />
+          <label>Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="Confirm new password" />
+          <button class="save-category-btn" data-category="passwordSection">Update Password</button>
+        </div>
+      </div>
+
+      <!-- Preferences -->
+      <div class="settings-category">
+        <div class="settings-header" data-target="preferencesSection">
+          Preferences <span class="arrow">▼</span>
+        </div>
+        <div class="settings-content" id="preferencesSection">
+          <label>Theme</label>
+          <select id="themeSelect">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+          <div id="previewArea" class="card">
+            <h3>Preview</h3>
+            <p>This is how your theme will look.</p>
+            <button class="preview-button">Sample Button</button>
+           </div>
+          <button class="save-category-btn" data-category="preferencesSection">Save Preferences</button>
+        </div>
+      </div>
+
+      <!-- Account Actions -->
+      <div class="settings-category">
+        <div class="settings-header" data-target="accountActions">
+          Account Actions <span class="arrow">▼</span>
+        </div>
+        <div class="settings-content" id="accountActions">
+          <button id="deleteAccountBtn" class="delete-account-btn">Delete Account</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+  <div class="modal-overlay"></div>
+  <div class="profile-modal-card">
+    <div class="profile-avatar-preview" id="profileAvatarPreview"></div>
+    <input type="file" id="profileImageInput" accept="image/*" style="display:none"/>
+    <p id="profileName">Loading...</p>
+    <p id="profileEmail">Loading...</p>
+    <div class="profile-actions">
+      <button id="saveProfileBtn">Save</button>
+      <button id="closeProfileBtn">Close</button>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+  </div>
+</div>
+
+<script src="Settings.js"></script>
+<script src="../Global/profile.js"></script>
+
+</body>
+</html>
