@@ -55,9 +55,15 @@
     </aside>
 
     <div class="main">
-      <input type="text" id="staffSearch" placeholder="Search by name or email..." 
-             style="width: 100%; padding: 12px; border-radius: 8px; border: none; background: #3a2a55; color: white; margin-bottom: 20px; font-size: 18px;">
+     <div class="staff-toolbar">
+  <input type="text" id="staffSearch" placeholder="Search by name or email...">
 
+  <div class="role-tabs">
+    <button type="button" class="role-tab active" data-role="all">All</button>
+    <button type="button" class="role-tab" data-role="staff">Staff</button>
+    <button type="button" class="role-tab" data-role="admin">Admin</button>
+  </div>
+</div>
       <div id="staffContainer" class="staff-container">
         </div>
 

@@ -1,90 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JPEG Events – Tickets</title>
+
   <script src="../Global/auth-util.js"></script>
   <script src="../Global/Theme.js"></script>
-  <link rel="stylesheet" href="User.css" />
-  <link rel="stylesheet" href="../Global/profile.css" />
+
+  <link rel="stylesheet" href="User.css"/>
+  <link rel="stylesheet" href="../Global/profile.css"/>
 </head>
+
 <body>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<div class="topbar">
+<header class="topbar">
   <div class="topbar-title">
     <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
-    JPEG EVENTS
+    <span>JPEG EVENTS</span>
   </div>
-  <div class="user-info">
+
+  <div class="user-info" id="userInfo">
     <span id="usernameDisplay"></span>
-    <div class="avatar" id="avatar"></div>
+    <div class="avatar" id="avatarBtn"></div>
   </div>
-</div>
+</header>
 
 <div class="container">
- <aside class="sidebar">
 
+  <aside class="sidebar">
     <div class="menu-item">
-      <img src="../Images/Dashboard.png" class="icons" alt="Events"></img>
+      <img src="../Images/Dashboard.png" class="icons" alt="Events"/>
       <a href="User-Dashboard.html" class="Side-Items">Events</a>
     </div>
 
     <div class="menu-item active">
-      <img src="../Images/Ticket.png" class="icons" alt="Tickets"></img>
-      <a href="#" class="Side-Items">Tickets</a>
+      <img src="../Images/Ticket.png" class="icons" alt="Tickets"/>
+      <a href="User-Tickets.html" class="Side-Items">Tickets</a>
     </div>
 
     <div class="menu-item">
-      <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
+      <img src="../Images/Settings.png" class="icons" alt="Settings"/>
       <a href="User-Settings.html" class="Side-Items">Settings</a>
     </div>
-
   </aside>
 
   <main class="main">
-    
-    <div class="main-header">
-      <div class="controls-left">
-        <select id="sortCategory1">
-          <option value="">Sort By</option>
-          <option value="date_asc">Date ↑</option>
-          <option value="date_desc" selected>Date ↓</option>
-          <option value="title_asc">Title A-Z</option>
-          <option value="title_desc">Title Z-A</option>
-          <option value="qty_asc">Quantity ↑</option>
-          <option value="qty_desc">Quantity ↓</option>
-        </select>
 
-        <select id="sortCategory2">
-          <option value="">All Tickets</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="ongoing">Valid Today</option>
-          <option value="expired">Expired</option>
-          <option value="scanned">Scanned / Used</option>
-        </select>
+    <section class="dashboard-hero">
+      <div>
+        <p class="hero-label">My Tickets</p>
+        <h1>Your Event Passes</h1>
+        <p class="hero-subtitle">View ticket status, search your bookings, and open QR codes only when valid.</p>
+      </div>
+    </section>
+
+    <section class="main-header upgraded-controls">
+      <div class="controls-left">
+
+        <div class="control-group">
+          <label for="sortCategory1">Sort</label>
+          <select id="sortCategory1">
+            <option value="">Sort By</option>
+            <option value="newest" selected>Newest</option>
+            <option value="date_asc">Date ↑</option>
+            <option value="date_desc">Date ↓</option>
+            <option value="title_asc">Title A-Z</option>
+            <option value="title_desc">Title Z-A</option>
+            <option value="qty_asc">Quantity ↑</option>
+            <option value="qty_desc">Quantity ↓</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="sortCategory2">Status</label>
+          <select id="sortCategory2">
+            <option value="">All Tickets</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="ongoing">Valid Today</option>
+            <option value="expired">Expired</option>
+            <option value="scanned">Scanned / Used</option>
+          </select>
+        </div>
+
       </div>
 
       <div class="controls-right">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search tickets..."
-        />
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" id="searchInput" placeholder="Search tickets..."/>
+        </div>
       </div>
-    </div>
+    </section>
 
     <div id="eventContainer" class="event-container"></div>
+
   </main>
 </div>
 
 <div class="modal" id="profileModal">
   <div class="modal-overlay"></div>
+
   <div class="profile-modal-card">
     <div class="profile-avatar-preview" id="profileAvatarPreview"></div>
-    <input type="file" id="profileImageInput" accept="image/*" style="display:none" />
+
+    <input
+      type="file"
+      id="profileImageInput"
+      accept="image/*"
+      style="display:none"
+    />
+
     <p id="profileName">Loading...</p>
     <p id="profileEmail">Loading...</p>
+
     <div class="profile-actions">
       <button id="saveProfileBtn">Save</button>
       <button id="closeProfileBtn">Close</button>

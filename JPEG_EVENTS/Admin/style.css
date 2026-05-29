@@ -554,17 +554,13 @@ select {
   z-index: 5;
 }
 
-.upload-preview img {
+.upload-preview > img#croppedResult {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-width: 100%;
-  min-height: 100%;
   object-fit: cover;
-  display: block;
+  display: none;
   z-index: 1;
   pointer-events: none;
 }
@@ -725,4 +721,600 @@ select {
 .metrics-grid .metric-card,
 .charts-grid .event-card {
   margin-bottom: 0;
+}
+
+#cropperWrap {
+  grid-column: 1 / span 2;
+  width: 100%;
+  max-height: 420px;
+  display: none;
+  border: 1px solid var(--border-med);
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg-preview);
+}
+
+#imageToCrop {
+  display: block;
+  max-width: 100%;
+  max-height: 320px;
+}
+
+#saveCropBtn {
+  margin-top: 12px;
+  background: var(--accent);
+  color: var(--text-inv);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+/* =========================
+   ENHANCED ADMIN EVENTS UI
+========================= */
+
+.topbar {
+  height: 70px;
+  padding: 0 28px;
+  background: rgba(44, 35, 54, 0.95);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.topbar-title span {
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.container {
+  height: calc(100vh - 70px);
+}
+
+.sidebar {
+  width: 240px;
+  padding: 18px 12px;
+  border-right: 1px solid var(--border-med);
+}
+
+.menu-item {
+  padding: 14px 18px;
+  margin: 8px 6px;
+  border-radius: 14px;
+}
+
+.menu-item:hover {
+  background: var(--glass-hover);
+  transform: translateX(4px);
+}
+
+.main {
+  padding: 34px;
+  background:
+    radial-gradient(circle at top right, rgba(140, 92, 255, 0.14), transparent 35%),
+    var(--bg-main);
+}
+
+.dashboard-hero {
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-sidebar));
+  border: 1px solid var(--border-med);
+  border-radius: 24px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
+}
+
+.hero-label {
+  margin: 0 0 6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.dashboard-hero h1 {
+  margin: 0;
+  font-size: 44px;
+  letter-spacing: 1px;
+}
+
+.hero-subtitle {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 17px;
+}
+
+.event-container {
+  display: grid;
+  gap: 22px;
+}
+
+.event-card {
+  border-radius: 22px;
+  padding: 22px;
+  background: linear-gradient(135deg, var(--bg-card), rgba(58, 42, 85, 0.72));
+  border: 1px solid var(--border-med);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-heavy);
+}
+
+.poster {
+  width: 170px;
+  height: 170px;
+  min-width: 170px;
+  max-width: 170px;
+  border-radius: 18px;
+}
+
+.event-title {
+  font-size: 38px;
+}
+
+.event-description {
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.add-btn {
+  width: 64px;
+  height: 64px;
+  right: 34px;
+  bottom: 34px;
+  border-radius: 22px;
+  font-size: 40px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
+}
+
+.modal {
+  backdrop-filter: blur(8px);
+}
+
+.upload-modal {
+  width: min(920px, 94vw);
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  padding: 34px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 35%),
+    var(--bg-sidebar);
+}
+
+.upload-preview {
+  width: 260px;
+  height: 260px;
+  border-radius: 24px;
+}
+
+.upload-icon {
+  font-size: 58px;
+}
+
+.upload-hover {
+  font-size: 17px;
+}
+
+.upload-fields label {
+  font-size: 15px;
+  letter-spacing: 1.5px;
+}
+
+.upload-fields input,
+.upload-fields textarea {
+  padding: 15px 17px;
+  border-radius: 14px;
+  font-size: 17px;
+}
+
+.upload-fields textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.event-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.upload-actions {
+  justify-content: flex-end;
+  padding-top: 24px;
+}
+
+.cancel-btn,
+.upload-btn {
+  padding: 13px 28px;
+  border-radius: 14px;
+  font-size: 16px;
+}
+
+.cancel-btn:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.upload-btn:hover {
+  transform: translateY(-2px);
+  background: var(--accent-hover);
+}
+
+.cropper-wrap {
+  border-radius: 20px !important;
+}
+
+.cropper-box {
+  max-height: 330px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+#imageToCrop {
+  max-height: 330px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 90px;
+  }
+
+  .Side-Items {
+    display: none;
+  }
+
+  .upload-modal {
+    grid-template-columns: 1fr;
+  }
+
+  .upload-preview,
+  #cropperWrap {
+    grid-column: auto;
+  }
+
+  .upload-preview {
+    width: 100%;
+    height: 260px;
+  }
+
+  .event-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .event-left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* =========================
+   ENHANCED STAFF PAGE UI
+========================= */
+
+.staff-toolbar {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-sidebar));
+  border: 1px solid var(--border-med);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+}
+
+.staff-toolbar input,
+.staff-toolbar select {
+  margin: 0;
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid var(--border-med);
+  background: var(--bg-preview);
+  color: var(--text-main);
+  padding: 0 16px;
+  font-size: 17px;
+  outline: none;
+}
+
+.staff-toolbar input {
+  flex: 1;
+}
+
+.staff-toolbar select {
+  width: 190px;
+  cursor: pointer;
+}
+
+.staff-toolbar input:focus,
+.staff-toolbar select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+}
+
+.staff-container {
+  display: grid;
+  gap: 20px;
+}
+
+.staff-item {
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--bg-card), rgba(58, 42, 85, 0.75));
+  border: 1px solid var(--border-med);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.22);
+}
+
+.staff-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-heavy);
+}
+
+.staff-item .poster {
+  width: 115px;
+  height: 115px;
+  min-width: 115px;
+  max-width: 115px;
+  border-radius: 50%;
+  border: 3px solid var(--border-heavy);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.staff-item .event-title {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.staff-item .event-description {
+  text-transform: none;
+  letter-spacing: 0.4px;
+}
+
+.staff-item .delete {
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+}
+
+.modal-content {
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--bg-modal), var(--bg-sidebar));
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+.modal-content input,
+.modal-content select {
+  height: 48px;
+  border-radius: 14px;
+  background: var(--bg-preview) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-med) !important;
+  font-size: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.modal-actions button {
+  border: none;
+  border-radius: 12px;
+  padding: 11px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#closeAddStaffBtn {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+#closeAddStaffBtn:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.modal-actions button[type="submit"] {
+  background: var(--accent);
+  color: var(--text-inv);
+}
+
+.modal-actions button[type="submit"]:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 800px) {
+  .staff-toolbar {
+    flex-direction: column;
+  }
+
+  .staff-toolbar select {
+    width: 100%;
+  }
+
+  .staff-item .event-left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .staff-item .poster {
+    width: 95px;
+    height: 95px;
+    min-width: 95px;
+  }
+}
+
+/* =========================
+   MODERN STAFF SORTING TABS
+========================= */
+
+.role-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-med);
+  border-radius: 18px;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.25);
+}
+
+.role-tab {
+  position: relative;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.role-tab:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.role-tab.active {
+  background: var(--accent);
+  color: var(--text-inv);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.role-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  width: 24px;
+  height: 3px;
+  border-radius: 99px;
+  background: currentColor;
+  transform: translateX(-50%);
+  opacity: 0.35;
+}
+/* =========================
+   ARCHIVE / UNARCHIVE BUTTONS
+========================= */
+
+.archive {
+  background: transparent;
+  border: 1px solid var(--border-heavy);
+  color: var(--text-muted);
+  transition: all 0.25s ease;
+}
+
+.archive:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  transform: scale(1.1);
+  border-color: var(--accent);
+}
+
+/* Archived state (danger-ish but not delete) */
+.archive:active {
+  transform: scale(0.95);
+}
+
+/* ========================= */
+
+.unarchive {
+  background: transparent;
+  border: 1px solid #4ade80; /* soft green */
+  color: #4ade80;
+  transition: all 0.25s ease;
+}
+
+.unarchive:hover {
+  background: #4ade80;
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.5);
+}
+
+.unarchive:active {
+  transform: scale(0.95);
+}
+/* =========================
+   EVENT TABS (ACTIVE / ARCHIVED)
+========================= */
+
+.event-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  margin-bottom: 22px;
+
+  background: var(--glass);
+  border: 1px solid var(--border-med);
+  border-radius: 18px;
+
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.25);
+  width: fit-content;
+}
+
+/* Base tab button */
+.tab-btn {
+  position: relative;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 14px;
+
+  background: transparent;
+  color: var(--text-muted);
+
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.tab-btn:hover {
+  color: var(--text-main);
+  background: var(--glass-hover);
+}
+
+/* Active tab */
+.tab-btn.active {
+  background: var(--accent);
+  color: var(--text-inv);
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Fancy underline glow */
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+
+  width: 24px;
+  height: 3px;
+  border-radius: 999px;
+
+  background: currentColor;
+  transform: translateX(-50%);
+  opacity: 0.35;
 }

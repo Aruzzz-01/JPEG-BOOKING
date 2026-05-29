@@ -1,239 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>JPEG Events – User Dashboard</title>
-<script src="../Global/auth-util.js"></script>
-<script src="../Global/Theme.js"></script>
-<link rel="stylesheet" href="User.css"/>
-<link rel="stylesheet" href="../Global/profile.css"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JPEG Events – User Dashboard</title>
+
+  <script src="../Global/auth-util.js"></script>
+  <script src="../Global/Theme.js"></script>
+
+  <link rel="stylesheet" href="User.css"/>
+  <link rel="stylesheet" href="../Global/profile.css"/>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
 <header class="topbar">
-
   <div class="topbar-title">
     <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
     <span>JPEG EVENTS</span>
   </div>
 
   <div class="user-info" id="userInfo">
-
     <span id="usernameDisplay"></span>
-
-    <!-- clickable avatar -->
     <div class="avatar" id="avatarBtn"></div>
-
   </div>
-
 </header>
-
 
 <div class="container">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
-
     <div class="menu-item active">
-      <img src="../Images/Dashboard.png" class="icons" alt="Events"></img>
+      <img src="../Images/Dashboard.png" class="icons" alt="Events"/>
       <a href="User-Dashboard.html" class="Side-Items">Events</a>
     </div>
 
     <div class="menu-item">
-      <img src="../Images/Ticket.png" class="icons" alt="Tickets"></img>
+      <img src="../Images/Ticket.png" class="icons" alt="Tickets"/>
       <a href="User-Tickets.html" class="Side-Items">Tickets</a>
     </div>
 
     <div class="menu-item">
-      <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
+      <img src="../Images/Settings.png" class="icons" alt="Settings"/>
       <a href="User-Settings.html" class="Side-Items">Settings</a>
     </div>
-
   </aside>
 
-
-  <!-- MAIN CONTENT -->
   <main class="main">
 
-    <!-- HEADER CONTROLS -->
-    <div class="main-header">
+    <section class="dashboard-hero">
+      <div>
+        <p class="hero-label">User Dashboard</p>
+        <h1>Discover Events</h1>
+        <p class="hero-subtitle">Browse available events, filter quickly, and book tickets.</p>
+      </div>
+    </section>
 
+    <section class="main-header upgraded-controls">
       <div class="controls-left">
 
-        <select id="sortCategory1">
+        <div class="control-group">
+          <label for="sortCategory1">Sort</label>
+          <select id="sortCategory1">
+            <option value="">Sort By</option>
+            <option value="newest" selected>Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="date_asc">Date ↑</option>
+            <option value="date_desc">Date ↓</option>
+            <option value="title_asc">Title A-Z</option>
+            <option value="title_desc">Title Z-A</option>
+            <option value="price_asc">Price ↑</option>
+            <option value="price_desc">Price ↓</option>
+            <option value="qty_asc">Quantity ↑</option>
+            <option value="qty_desc">Quantity ↓</option>
+          </select>
+        </div>
 
-          <option value="">Sort By</option>
-          
-          <option value="date_asc">Date ↑</option>
-          <option value="date_desc" selected>Date ↓</option>
-
-          <option value="title_asc">Title A-Z</option>
-          <option value="title_desc">Title Z-A</option>
-
-          <option value="price_asc">Price ↑</option>
-          <option value="price_desc">Price ↓</option>
-
-          <option value="qty_asc">Quantity ↑</option>
-          <option value="qty_desc">Quantity ↓</option>
-
-        </select>
-
-
-        <select id="sortCategory2">
-
-          <option value="">All Events</option>
-          <option value="upcoming">Upcoming</option>
-          <option value="ongoing">Ongoing</option>
-          <option value="expired">Expired</option>
-
-        </select>
+        <div class="control-group">
+          <label for="sortCategory2">Status</label>
+          <select id="sortCategory2">
+            <option value="">All Events</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="expired">Expired</option>
+          </select>
+        </div>
 
       </div>
-
 
       <div class="controls-right">
-        
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search events..."
-        />
-
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" id="searchInput" placeholder="Search events..."/>
+        </div>
       </div>
+    </section>
 
-    </div>
-
-
-    <!-- EVENT CONTAINER -->
     <div id="eventContainer" class="event-container"></div>
 
-
   </main>
-
 </div>
 
-
-
-<!-- ========================= -->
-<!-- BOOKING MODAL -->
-<!-- ========================= -->
-
 <div class="modal" id="bookingModal">
-
   <div class="modal-overlay"></div>
 
   <div class="modal-content">
-
     <h2>Book Tickets</h2>
 
     <p id="eventTitleBooking"></p>
-
     <p id="eventInfoBooking"></p>
 
+    <label for="ticketQuantity">Ticket Quantity</label>
+    <input type="number" id="ticketQuantity" min="1" value="1"/>
 
-    <label for="ticketQuantity">
-      Ticket Quantity
-    </label>
+    <p class="payment-title">Payment Method</p>
 
-    <input
-      type="number"
-      id="ticketQuantity"
-      min="1"
-      value="1"
-    />
-
-
-    <p>Payment Method</p>
-
-<input type="checkbox" id="GCash" class="hidden-checkbox"/>
-<label class="payment-btn" for="GCash">
-  GCash
-</label>
-
-
-
-
+    <input type="checkbox" id="GCash" class="hidden-checkbox"/>
+    <label class="payment-btn" for="GCash">GCash</label>
 
     <div class="modal-actions">
-
-      <button id="cancelBookingBtn">
-        Cancel
-      </button>
-
-      <button id="confirmBookingBtn">
-        Book
-      </button>
-
+      <button id="cancelBookingBtn">Cancel</button>
+      <button id="confirmBookingBtn">Book</button>
     </div>
 
-
     <p id="ticketHashDisplay"></p>
-
   </div>
-
 </div>
 
-
-
-
-<!-- ========================= -->
-<!-- PROFILE MODAL -->
-<!-- ========================= -->
-
 <div class="modal" id="profileModal">
-
   <div class="modal-overlay"></div>
 
   <div class="profile-modal-card">
+    <div class="profile-avatar-preview" id="profileAvatarPreview"></div>
 
-
-    <!-- avatar preview -->
-    <div
-  class="profile-avatar-preview"
-  id="profileAvatarPreview">
-</div>
-
-<input
-  type="file"
-  id="profileImageInput"
-  accept="image/*"
-  style="display:none"
-/>
-
-
+    <input
+      type="file"
+      id="profileImageInput"
+      accept="image/*"
+      style="display:none"
+    />
 
     <p id="profileName">Loading...</p>
     <p id="profileEmail">Loading...</p>
 
-
-
     <div class="profile-actions">
-
-      <button id="saveProfileBtn">
-        Save
-      </button>
-
-      <button id="closeProfileBtn">
-        Close
-      </button>
-
-      <button id="logoutBtn" class="logout-btn">
-        Logout
-      </button>
-
+      <button id="saveProfileBtn">Save</button>
+      <button id="closeProfileBtn">Close</button>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
     </div>
-
-
   </div>
-
 </div>
 
-
-
-<script src="User.js"></script> 
+<script src="User.js"></script>
 <script src="../Global/profile.js"></script>
 
 </body>

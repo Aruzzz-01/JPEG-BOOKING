@@ -125,14 +125,20 @@ app.get('/api/users/me', async (req, res) => {
 
 app.put('/api/users/me', async (req, res) => {
     if (!req.user) return res.status(401).send("Not logged in.");
+
     const { firstName, lastName, email, profile_image } = req.body;
+
     try {
         await pool.query(
             `UPDATE users
-             SET first_name = $1, last_name = $2, email = $3, profile_image = COALESCE($4, profile_image)
+             SET first_name = COALESCE($1, first_name),
+                 last_name = COALESCE($2, last_name),
+                 email = COALESCE($3, email),
+                 profile_image = COALESCE($4, profile_image)
              WHERE id = $5`,
-            [firstName, lastName, email, profile_image || null, req.user.id]
+            [firstName || null, lastName || null, email || null, profile_image || null, req.user.id]
         );
+
         res.send("Updated.");
     } catch (err) {
         console.error("DATABASE ERROR:", err.message);
@@ -174,11 +180,24 @@ app.delete('/api/users/me', async (req, res) => {
 app.get('/api/staff', requireRole('admin'), async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT id, first_name, last_name, email, profile_image, role
-            FROM users
-            WHERE role IN ('staff', 'admin')
-            ORDER BY id ASC
-        `);
+    SELECT 
+    u.id, 
+    u.first_name, 
+    u.last_name, 
+    u.email, 
+    u.profile_image, 
+    u.role,
+    CASE 
+        WHEN u.role = 'staff' THEN COUNT(b.id)
+        ELSE NULL
+    END AS scan_count
+FROM users u
+LEFT JOIN bookings b 
+    ON b.checked_in_by = u.id
+WHERE u.role IN ('staff', 'admin')
+GROUP BY u.id
+ORDER BY u.id ASC
+`);
         res.json(result.rows);
     } catch (err) { res.status(500).send("Database error"); }
 });
@@ -222,7 +241,78 @@ app.post('/api/events', requireRole('admin'), async (req, res) => {
         res.json(result.rows[0]);
     } catch (err) { res.status(500).send("Creation failed."); }
 });
+app.put('/api/events/:id', requireRole('admin'), async (req, res) => {
+    const { id } = req.params;
+    const { title, description, image_url, ticket_price, ticket_quantity, event_date } = req.body;
 
+    try {
+        const result = await pool.query(
+            `UPDATE events
+             SET title = $1,
+                 description = $2,
+                 image_url = COALESCE($3, image_url),
+                 ticket_price = $4,
+                 ticket_quantity = $5,
+                 event_date = $6
+             WHERE id = $7
+             RETURNING *`,
+            [title, description, image_url || null, ticket_price, ticket_quantity, event_date, id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).send("Event not found.");
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error("Update event error:", err.message);
+        res.status(500).send("Update failed.");
+    }
+});
+app.put('/api/events/:id/archive', requireRole('admin'), async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await pool.query(
+            `UPDATE events
+             SET archived = true
+             WHERE id = $1
+             RETURNING *`,
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).send("Event not found.");
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error("Archive event error:", err.message);
+        res.status(500).send("Archive failed.");
+    }
+});
+app.put('/api/events/:id/unarchive', requireRole('admin'), async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await pool.query(
+            `UPDATE events
+             SET archived = false
+             WHERE id = $1
+             RETURNING *`,
+            [id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).send("Event not found.");
+        }
+
+        res.json(result.rows[0]);
+    } catch (err) {
+        console.error("Unarchive event error:", err.message);
+        res.status(500).send("Unarchive failed.");
+    }
+});
 app.delete('/api/events/:id', requireRole('admin'), async (req, res) => {
     await pool.query('DELETE FROM events WHERE id=$1', [req.params.id]);
     res.json({ success: true });
@@ -230,75 +320,120 @@ app.delete('/api/events/:id', requireRole('admin'), async (req, res) => {
 
 app.get('/api/admin/dashboard', requireRole('admin'), async (req, res) => {
     try {
-        // 1. Basic Stats (Updated to include page_views)
-        const summaryPromise = pool.query(`
+        const days = parseInt(req.query.days) || 30;
+        const eventId = req.query.event || "all";
+
+        const eventFilter = eventId === "all" ? "" : "AND e.id = $2";
+        const bookingEventFilter = eventId === "all" ? "" : "AND event_id = $2";
+
+        const params = eventId === "all" ? [days] : [days, eventId];
+
+        const summary = await pool.query(`
             SELECT 
-                (SELECT COUNT(id) FROM bookings) AS total_tickets_sold, 
-                (SELECT COALESCE(SUM(price_paid), 0) FROM bookings) AS total_revenue,
-                (SELECT COUNT(id) FROM page_views) AS total_views
-        `);
+                (SELECT COUNT(id) FROM bookings 
+                 WHERE created_at >= NOW() - ($1 || ' days')::INTERVAL
+                 ${bookingEventFilter}) AS total_tickets_sold,
 
-        // 2. Revenue Trend (Line Chart)
-        const trendPromise = pool.query(`
-            SELECT TO_CHAR(created_at, 'YYYY-MM-DD') AS date, SUM(price_paid) AS amount 
-            FROM bookings GROUP BY date ORDER BY date ASC LIMIT 30
-        `);
+                (SELECT COALESCE(SUM(price_paid), 0) FROM bookings 
+                 WHERE created_at >= NOW() - ($1 || ' days')::INTERVAL
+                 ${bookingEventFilter}) AS total_revenue,
 
-        // 3. Performance Table
-        const eventsPromise = pool.query(`
-            SELECT e.id, e.title, e.ticket_quantity AS capacity, COUNT(b.id) AS sold, 
-            SUM(CASE WHEN b.checked_in = true THEN 1 ELSE 0 END) AS attended, 
-            COALESCE(SUM(b.price_paid), 0) AS revenue 
-            FROM events e LEFT JOIN bookings b ON e.id = b.event_id 
-            GROUP BY e.id ORDER BY e.event_date DESC
-        `);
+                (SELECT COUNT(id) FROM page_views 
+                 WHERE viewed_at >= NOW() - ($1 || ' days')::INTERVAL
+                 ${eventId === "all" ? "" : "AND event_id = $2"}) AS total_views
+        `, params);
 
-        // 4. Ticket Types (Doughnut Chart)
-        const ticketTypesPromise = pool.query(`
+        const trend = await pool.query(`
+            SELECT TO_CHAR(b.created_at, 'YYYY-MM-DD') AS date, 
+                   SUM(b.price_paid) AS amount
+            FROM bookings b
+            JOIN events e ON e.id = b.event_id
+            WHERE b.created_at >= NOW() - ($1 || ' days')::INTERVAL
+            ${eventFilter}
+            GROUP BY date
+            ORDER BY date ASC
+        `, params);
+
+        const events = await pool.query(`
+            SELECT 
+                e.id,
+                e.title,
+                e.ticket_quantity AS capacity,
+                COUNT(b.id) AS sold,
+                SUM(CASE WHEN b.checked_in = true THEN 1 ELSE 0 END) AS attended,
+                COALESCE(SUM(b.price_paid), 0) AS revenue
+            FROM events e
+            LEFT JOIN bookings b 
+                ON e.id = b.event_id
+                AND b.created_at >= NOW() - ($1 || ' days')::INTERVAL
+            WHERE 1=1
+            ${eventFilter}
+            GROUP BY e.id
+            ORDER BY e.event_date DESC
+        `, params);
+
+        const ticketTypes = await pool.query(`
             SELECT 
                 CASE 
                     WHEN price_paid >= 1000 THEN 'VIP'
                     WHEN price_paid >= 500 THEN 'Early Bird'
                     ELSE 'Gen Ad'
-                END as label,
-                COUNT(*) as value
+                END AS label,
+                COUNT(*) AS value
             FROM bookings
+            WHERE created_at >= NOW() - ($1 || ' days')::INTERVAL
+            ${bookingEventFilter}
             GROUP BY label
+        `, params);
+
+        const platforms = await pool.query(`
+            SELECT COALESCE(device_type, 'Desktop') AS label, COUNT(*) AS value
+            FROM bookings
+            WHERE created_at >= NOW() - ($1 || ' days')::INTERVAL
+            ${bookingEventFilter}
+            GROUP BY label
+        `, params);
+
+        const eventList = await pool.query(`
+            SELECT id, title 
+            FROM events
+            WHERE archived = false OR archived IS NULL
+            ORDER BY title ASC
         `);
 
-        // 5. Platform Distribution (Bar Chart)
-        const platformPromise = pool.query(`
-            SELECT COALESCE(device_type, 'Desktop') as label, COUNT(*) as value 
-            FROM bookings GROUP BY label
-        `);
+        const totalSold = parseInt(summary.rows[0].total_tickets_sold) || 0;
+        const totalViews = parseInt(summary.rows[0].total_views) || 1;
 
-        const [summary, trend, events, ticketTypes, platforms] = await Promise.all([
-            summaryPromise, trendPromise, eventsPromise, ticketTypesPromise, platformPromise
-        ]);
-
-        const totalSold = parseInt(summary.rows[0].total_tickets_sold);
-        const totalViews = parseInt(summary.rows[0].total_views) || 1; 
-
-        res.json({ 
+        res.json({
             stats: {
                 ...summary.rows[0],
                 conversion_rate: ((totalSold / totalViews) * 100).toFixed(1)
-            }, 
-            chartData: trend.rows, 
+            },
+            chartData: trend.rows,
             events: events.rows,
-            ticketTypes: ticketTypes.rows, 
-            platforms: platforms.rows 
+            ticketTypes: ticketTypes.rows,
+            platforms: platforms.rows,
+            eventList: eventList.rows
         });
-    } catch (err) { 
+
+    } catch (err) {
         console.error(err);
-        res.status(500).send("Admin data load failed"); 
+        res.status(500).send("Admin data load failed");
     }
 });
 
 // --- Public/User: Events & Bookings ---
 
 app.get('/api/events', async (req, res) => {
-    const result = await pool.query(`SELECT * FROM events ORDER BY event_date ASC`);
+    const showArchived = req.query.archived === "true";
+
+    const result = await pool.query(`
+        SELECT * 
+        FROM events 
+        WHERE archived = $1
+        ORDER BY event_date ASC
+    `, [showArchived]);
+
     const events = result.rows.map(e => ({ ...e, status: getEventStatus(e.event_date) }));
     res.json(events);
 });

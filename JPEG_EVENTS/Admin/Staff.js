@@ -40,6 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const staffContainer = document.getElementById('staffContainer');
     const searchInput = document.getElementById('staffSearch'); 
 
+    const roleTabs = document.querySelectorAll('.role-tab');
+let selectedRole = "all";
+
     // ===== API HELPER =====
     async function apiRequest(endpoint, options = {}) {
         // FIXED: Using relative path to prevent localhost connection errors
@@ -105,6 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         </span>
                     </div>
                     <div class="event-description" style="font-size: 18px; opacity: 0.7;">${user.email}</div>
+                    <div class="event-description" style="font-size: 18px; color: #2ecc71; margin-top: 8px;">
+   ${user.role === 'staff' ? `
+    <div class="event-description" style="font-size: 18px; color: #2ecc71; margin-top: 8px;">
+        Scanned Tickets: ${user.scan_count || 0}
+    </div>
+` : ''}
+</div>
                 </div>
             </div>
             <div class="actions">
@@ -137,22 +147,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ===== SEARCH LOGIC =====
-    searchInput?.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const filtered = allUsers.filter(u => 
-            u.first_name.toLowerCase().includes(query) || 
-            u.last_name.toLowerCase().includes(query) || 
-            u.email.toLowerCase().includes(query)
-        );
-        renderList(filtered);
+    // ===== SEARCH + ROLE FILTER LOGIC =====
+function applyStaffFilters() {
+    const query = searchInput?.value.toLowerCase() || "";
+    
+
+    const filtered = allUsers.filter(u => {
+        const matchesSearch =
+            u.first_name.toLowerCase().includes(query) ||
+            u.last_name.toLowerCase().includes(query) ||
+            u.email.toLowerCase().includes(query);
+
+        const matchesRole =
+            selectedRole === "all" || u.role === selectedRole;
+
+        return matchesSearch && matchesRole;
     });
+
+    renderList(filtered);
+}
+
+searchInput?.addEventListener('input', applyStaffFilters);
+ 
+    roleTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        roleTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        selectedRole = tab.dataset.role;
+        applyStaffFilters();
+    });
+});
 
     // ===== INITIAL LOAD =====
     async function loadStaff() {
         try {
             const data = await apiRequest('/api/staff');
             allUsers = Array.isArray(data) ? data : [];
-            renderList(allUsers);
+            applyStaffFilters();
         } catch (err) {
             console.error("Failed to load users:", err.message);
             if (staffContainer) staffContainer.innerHTML = "<p style='color: red; padding: 20px;'>Error loading staff.</p>";

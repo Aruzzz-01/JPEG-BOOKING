@@ -4,198 +4,183 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JPEG Events – Ticket Analytics</title>
+
   <script src="../Global/auth-util.js"></script>
   <script src="../Global/Theme.js"></script>
+
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="../Global/profile.css" />
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 </head>
 
 <body>
 
-  <header class="topbar">
-
-    <div class="topbar-title">
-      <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
-      <span>JPEG EVENTS</span>
-    </div>
-
-    <div class="user-info" id="userInfo">
-
-      <span id="usernameDisplay"></span>
-
-      <!-- clickable avatar -->
-      <div class="avatar" id="avatarBtn"></div>
-
-    </div>
-
-  </header>
-  <div class="container">
-
-    <aside class="sidebar">
-      <div class="menu-item">
-        <img src="../Images/Ticket.png" class="icons" alt="Events"></img>
-        <a href="Admin-Events.html" class="Side-Items">Events</a>
-      </div>
-      <div class="menu-item">
-        <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"></img>
-        <a href="Admin-Dashboard.html" class="Side-Items">Dashboard</a>
-      </div>
-      <div class="menu-item active">
-        <img src="../Images/Analytics.png" class="icons" alt="Dashboard"></img>
-        <a href="Admin-Analytics.html" class="Side-Items">Analytics</a>
-      </div>
-      <div class="menu-item">
-        <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
-        <a href="Admin-Setting.html" class="Side-Items">Settings</a>
-      </div>
-      <div class="menu-item">
-        <img src="../Images/Profile.png" class="icons" alt="Dashboard"></img>
-        <a href="Admin-Staff.html" class="Side-Items">Staff</a>
-      </div>
-    </aside>
-
-    <div class="main">
-      
-      <div class="filter-bar">
-        <h2 style="margin: 0;">Analytics Overview</h2>
-        <div class="filter-controls">
-          <select class="filter-select" id="eventFilter">
-            <option value="all">All Events</option>
-            <option value="ado">Ado World Tour 2026</option>
-            <option value="cosplay">Cosplay Carnival</option>
-          </select>
-          <select class="filter-select" id="dateFilter">
-            <option value="7">Last 7 Days</option>
-            <option value="30" selected>Last 30 Days</option>
-            <option value="90">Last 90 Days</option>
-          </select>
-          <button class="icon-btn edit" id="export-csv" title="Download CSV" style="border-radius: 8px; width: auto; padding: 0 15px;">Export Data</button>
-        </div>
-      </div>
-
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-label">TOTAL REVENUE</div>
-          <div class="metric-value" id="total-revenue">₱0.00</div>
-          <div class="metric-trend positive">↑ 12% vs last period</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">TICKETS SOLD</div>
-          <div class="metric-value" id="total-sold">0</div>
-          <div class="metric-trend positive">↑ 8% vs last period</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">PAGE VIEWS</div>
-          <div class="metric-value" id="page-views">0</div>
-          <div class="metric-trend negative">↓ 3% vs last period</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">CONVERSION RATE</div>
-          <div class="metric-value" id="conversion-rate">0%</div>
-          <div class="metric-trend positive">↑ 1.5% vs last period</div>
-        </div>
-      </div>
-
-      <div class="event-card" style="display: block; padding: 20px;">
-        <h3 style="margin-top: 0; margin-bottom: 20px;">Revenue Timeline</h3>
-        <div style="height: 300px;">
-          <canvas id="salesChart"></canvas>
-        </div>
-      </div>
-
-      <div class="charts-grid">
-        <div class="event-card" style="display: block; padding: 20px;">
-          <h3 style="margin-top: 0; margin-bottom: 20px;">Sales by Ticket Type</h3>
-          <div style="height: 250px; position: relative;">
-            <canvas id="ticketTypeChart"></canvas>
-          </div>
-        </div>
-        
-        <div class="event-card" style="display: block; padding: 20px;">
-          <h3 style="margin-top: 0; margin-bottom: 20px;">Audience Platform</h3>
-          <div style="height: 250px; position: relative;">
-            <canvas id="platformChart"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <h2 style="margin: 30px 0 15px;">Event Performance Deep-Dive</h2>
-      <div class="event-card" style="display: block; padding: 0; overflow: hidden;">
-        <table style="width: 100%; border-collapse: collapse; text-align: left;">
-          <thead>
-            <tr style="background: rgba(255,255,255,0.05);">
-              <th style="padding: 15px;">Event</th>
-              <th style="padding: 15px;">Net Sales</th>
-              <th style="padding: 15px;">Revenue</th>
-              <th style="padding: 15px;">Scan Rate (No-Shows)</th>
-            </tr>
-          </thead>
-          <tbody id="events-table-body">
-            </tbody>
-        </table>
-      </div>
-
-    </div>
-    <!-- ========================= -->
-  <!-- PROFILE MODAL -->
-  <!-- ========================= -->
-
-  <div class="modal" id="profileModal">
-
-    <div class="modal-overlay"></div>
-
-    <div class="profile-modal-card">
-
-
-      <!-- avatar preview -->
-      <div
-    class="profile-avatar-preview"
-    id="profileAvatarPreview">
+<header class="topbar">
+  <div class="topbar-title">
+    <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
+    <span>JPEG EVENTS</span>
   </div>
 
-  <input
-    type="file"
-    id="profileImageInput"
-    accept="image/*"
-    style="display:none"
-  />
+  <div class="user-info" id="userInfo">
+    <span id="usernameDisplay"></span>
+    <div class="avatar" id="avatarBtn"></div>
+  </div>
+</header>
 
+<div class="container">
 
+  <aside class="sidebar">
+    <div class="menu-item">
+      <img src="../Images/Ticket.png" class="icons" alt="Events"/>
+      <a href="Admin-Events.html" class="Side-Items">Events</a>
+    </div>
 
-      <p id="profileName">Loading...</p>
-      <p id="profileEmail">Loading...</p>
+    <div class="menu-item">
+      <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"/>
+      <a href="Admin-Dashboard.html" class="Side-Items">Dashboard</a>
+    </div>
 
+    <div class="menu-item active">
+      <img src="../Images/Analytics.png" class="icons" alt="Analytics"/>
+      <a href="Admin-Analytics.html" class="Side-Items">Analytics</a>
+    </div>
 
+    <div class="menu-item">
+      <img src="../Images/Settings.png" class="icons" alt="Settings"/>
+      <a href="Admin-Setting.html" class="Side-Items">Settings</a>
+    </div>
 
-      <div class="profile-actions">
+    <div class="menu-item">
+      <img src="../Images/Profile.png" class="icons" alt="Staff"/>
+      <a href="Admin-Staff.html" class="Side-Items">Staff</a>
+    </div>
+  </aside>
 
-        <button id="saveProfileBtn">
-          Save
+  <main class="main">
+
+    <div class="filter-bar">
+      <h2 style="margin: 0;">Analytics Overview</h2>
+
+      <div class="filter-controls">
+        <select class="filter-select" id="eventFilter">
+          <option value="all">All My Events</option>
+        </select>
+
+        <select class="filter-select" id="dateFilter">
+          <option value="7">Last 7 Days</option>
+          <option value="30" selected>Last 30 Days</option>
+          <option value="90">Last 90 Days</option>
+        </select>
+
+        <button
+          type="button"
+          class="icon-btn edit"
+          id="export-csv"
+          title="Download Excel"
+          style="border-radius: 8px; width: auto; padding: 0 15px;"
+        >
+          Export Data
         </button>
+      </div>
+    </div>
 
-        <button id="closeProfileBtn">
-          Close
-        </button>
-
-        <button id="logoutBtn" class="logout-btn">
-          Logout
-        </button>
-
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">TOTAL REVENUE</div>
+        <div class="metric-value" id="total-revenue">₱0.00</div>
+        <div class="metric-trend" id="revenue-trend">Based on selected filter</div>
       </div>
 
+      <div class="metric-card">
+        <div class="metric-label">TICKETS SOLD</div>
+        <div class="metric-value" id="total-sold">0</div>
+        <div class="metric-trend" id="sold-trend">Based on selected filter</div>
+      </div>
 
+      <div class="metric-card">
+        <div class="metric-label">PAGE VIEWS</div>
+        <div class="metric-value" id="page-views">0</div>
+        <div class="metric-trend" id="views-trend">Based on selected filter</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-label">CONVERSION RATE</div>
+        <div class="metric-value" id="conversion-rate">0%</div>
+        <div class="metric-trend" id="conversion-trend">Sold ÷ Views</div>
+      </div>
     </div>
 
-  </div>
+    <div class="event-card" style="display:block; padding:20px;">
+      <h3 style="margin-top:0; margin-bottom:20px;">Revenue Timeline</h3>
+      <div style="height:300px;">
+        <canvas id="salesChart"></canvas>
+      </div>
+    </div>
 
+    <div class="charts-grid">
+      <div class="event-card" style="display:block; padding:20px;">
+        <h3 style="margin-top:0; margin-bottom:20px;">Sales by Ticket Type</h3>
+        <div style="height:250px; position:relative;">
+          <canvas id="ticketTypeChart"></canvas>
+        </div>
+      </div>
+
+      <div class="event-card" style="display:block; padding:20px;">
+        <h3 style="margin-top:0; margin-bottom:20px;">Audience Platform</h3>
+        <div style="height:250px; position:relative;">
+          <canvas id="platformChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="margin:30px 0 15px;">Event Performance Deep-Dive</h2>
+
+    <div class="event-card" style="display:block; padding:0; overflow:hidden;">
+      <table style="width:100%; border-collapse:collapse; text-align:left;">
+        <thead>
+          <tr style="background:rgba(255,255,255,0.05);">
+            <th style="padding:15px;">Event</th>
+            <th style="padding:15px;">Net Sales</th>
+            <th style="padding:15px;">Revenue</th>
+            <th style="padding:15px;">Scan Rate / No-Shows</th>
+          </tr>
+        </thead>
+        <tbody id="events-table-body"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+</div>
+
+<div class="modal" id="profileModal">
+  <div class="modal-overlay"></div>
+
+  <div class="profile-modal-card">
+    <div class="profile-avatar-preview" id="profileAvatarPreview"></div>
+
+    <input
+      type="file"
+      id="profileImageInput"
+      accept="image/*"
+      style="display:none"
+    />
+
+    <p id="profileName">Loading...</p>
+    <p id="profileEmail">Loading...</p>
+
+    <div class="profile-actions">
+      <button type="button" id="saveProfileBtn">Save</button>
+      <button type="button" id="closeProfileBtn">Close</button>
+      <button type="button" id="logoutBtn" class="logout-btn">Logout</button>
     </div>
   </div>
-  </div>
+</div>
 
+<script src="Analytics.js"></script>
+<script src="../Global/profile.js"></script>
 
-  <script src="Analytics.js"></script>
-  <script src="../Global/profile.js"></script>
 </body>
 </html>

@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Check Auth
-    if (typeof Auth !== 'undefined') {
-        const user = Auth.protectPage('admin');
+    // ===== AUTH CHECK =====
+    if (typeof Auth !== "undefined") {
+        const user = Auth.protectPage("admin");
         if (!user) return;
     }
 
-    // ===== AUTH =====
     const token = localStorage.getItem("token");
     if (!token) return window.location.href = "../../index.html";
 
@@ -17,7 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return window.location.href = "../../index.html";
     }
 
-    if (userPayload.role !== "admin") window.location.href = "../../User/User-Dashboard.html";
+    if (userPayload.role !== "admin") {
+        window.location.href = "../../User/User-Dashboard.html";
+    }
 
     // ===== ELEMENTS =====
     const eventDateInput = document.getElementById("eventDate");
@@ -26,24 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const eventModal = document.getElementById("uploadModal");
     const cancelBtn = document.getElementById("cancelBtn");
     const uploadBtn = document.getElementById("uploadBtn");
+
     const titleInput = document.getElementById("eventTitle");
     const descInput = document.getElementById("eventDesc");
     const imgInput = document.getElementById("eventImage");
-    const croppedResult = document.getElementById('croppedResult');
-    const cropperWrap = document.getElementById('cropperWrap');
-    const imageToCrop = document.getElementById('imageToCrop');
-    const saveCropBtn = document.getElementById('saveCropBtn');
     const ticketPriceInput = document.getElementById("ticketPrice");
     const ticketQuantityInput = document.getElementById("ticketQuantity");
-    const previewIcon = document.querySelector('.upload-icon');
-    const previewText = document.querySelector('.upload-hover');
+
+    const croppedResult = document.getElementById("croppedResult");
+    const cropperWrap = document.getElementById("cropperWrap");
+    const imageToCrop = document.getElementById("imageToCrop");
+    const saveCropBtn = document.getElementById("saveCropBtn");
+
+    const previewIcon = document.querySelector(".upload-icon");
+    const previewText = document.querySelector(".upload-hover");
+
+    const activeEventsBtn = document.getElementById("activeEventsBtn");
+    const archivedEventsBtn = document.getElementById("archivedEventsBtn");
 
     let cropper;
     let finalCroppedImageBase64 = null;
+    let showingArchived = false;
 
     // ===== API HELPER =====
     async function apiRequest(endpoint, options = {}) {
-        // FIXED: Using relative path to prevent localhost connection errors
         const response = await fetch(endpoint, {
             headers: {
                 "Content-Type": "application/json",
@@ -57,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const errorText = await response.text();
             throw new Error(errorText || "Request failed");
         }
+
         if (response.status === 204) return null;
         return response.json();
     }
@@ -65,21 +73,25 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadEvents() {
         try {
             if (container) container.innerHTML = "";
-            const events = await apiRequest("/api/events");
+
+            const events = await apiRequest(`/api/events?archived=${showingArchived}`);
             events.forEach(renderEventCard);
         } catch (err) {
             console.error("Load Events Error:", err.message);
         }
     }
 
+    // ===== RENDER EVENT CARD =====
     function renderEventCard(event) {
         const card = document.createElement("div");
         card.className = "event-card";
+
         card.innerHTML = `
             <div class="event-left">
                 <div class="poster">
                     <img src="${event.image_url || ""}" alt="Event Image">
                 </div>
+
                 <div class="text-content">
                     <div class="event-title">${event.title || "Untitled"}</div>
                     <div class="event-code">Code: ${event.event_code || "Generating..."}</div>
@@ -89,27 +101,101 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             </div>
+
             <div class="actions">
-                <button class="icon-btn delete">🗑</button>
+                ${
+                    showingArchived
+                        ? `<button class="icon-btn unarchive">↩️</button>`
+                        : `
+                            <button class="icon-btn edit">✏️</button>
+                            <button class="icon-btn archive">🗄️</button>
+                          `
+                }
             </div>
         `;
-        card.querySelector(".delete").addEventListener("click", async () => {
-            if (!confirm("Delete this event?")) return;
-            try {
-                await apiRequest(`/api/events/${event.id}`, { method: "DELETE" });
-                card.remove();
-            } catch (err) {
-                alert(err.message);
-            }
-        });
+
+        if (!showingArchived) {
+            const editBtn = card.querySelector(".edit");
+            const archiveBtn = card.querySelector(".archive");
+
+            editBtn?.addEventListener("click", () => {
+                eventModal.style.display = "flex";
+
+                titleInput.value = event.title || "";
+                descInput.value = event.description || "";
+                ticketPriceInput.value = event.ticket_price || "";
+                ticketQuantityInput.value = event.ticket_quantity || "";
+                eventDateInput.value = event.event_date ? event.event_date.split("T")[0] : "";
+
+                uploadBtn.dataset.editId = event.id;
+                uploadBtn.dataset.existingImage = event.image_url || "";
+
+                if (event.image_url) {
+                    croppedResult.src = event.image_url;
+                    croppedResult.style.display = "block";
+                    previewIcon.style.display = "none";
+                    previewText.style.display = "none";
+                }
+            });
+
+            archiveBtn?.addEventListener("click", async () => {
+                if (!confirm("Archive this event?")) return;
+
+                try {
+                    await apiRequest(`/api/events/${event.id}/archive`, {
+                        method: "PUT"
+                    });
+
+                    card.remove();
+                } catch (err) {
+                    alert(err.message);
+                }
+            });
+        } else {
+            const unarchiveBtn = card.querySelector(".unarchive");
+
+            unarchiveBtn?.addEventListener("click", async () => {
+                if (!confirm("Unarchive this event?")) return;
+
+                try {
+                    await apiRequest(`/api/events/${event.id}/unarchive`, {
+                        method: "PUT"
+                    });
+
+                    card.remove();
+                } catch (err) {
+                    alert(err.message);
+                }
+            });
+        }
+
         if (container) container.prepend(card);
     }
 
+    // ===== TAB BUTTONS =====
+    activeEventsBtn?.addEventListener("click", () => {
+        showingArchived = false;
+
+        activeEventsBtn.classList.add("active");
+        archivedEventsBtn?.classList.remove("active");
+
+        loadEvents();
+    });
+
+    archivedEventsBtn?.addEventListener("click", () => {
+        showingArchived = true;
+
+        archivedEventsBtn.classList.add("active");
+        activeEventsBtn?.classList.remove("active");
+
+        loadEvents();
+    });
+
     // ===== CROPPER LOGIC =====
-    imgInput?.addEventListener("change", function(e) {
+    imgInput?.addEventListener("change", function (e) {
         const file = e.target.files[0];
         if (!file) return;
-        
+
         if (file.size > 5 * 1024 * 1024) {
             alert("Image too big (max 5MB).");
             imgInput.value = "";
@@ -117,24 +203,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const reader = new FileReader();
-        reader.onload = function(event) {
+
+        reader.onload = function (event) {
             if (imageToCrop) {
                 imageToCrop.src = event.target.result;
-                if (cropperWrap) cropperWrap.style.display = 'block';
-                
+
+                if (cropperWrap) cropperWrap.style.display = "block";
                 if (cropper) cropper.destroy();
-                
+
                 cropper = new Cropper(imageToCrop, {
                     aspectRatio: 1,
                     viewMode: 1,
-                    autoCropArea: 1,
+                    autoCropArea: 1
                 });
             }
         };
+
         reader.readAsDataURL(file);
     });
 
-    saveCropBtn?.addEventListener('click', function() {
+    saveCropBtn?.addEventListener("click", function () {
         if (!cropper) return;
 
         const canvas = cropper.getCroppedCanvas({
@@ -143,43 +231,58 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         finalCroppedImageBase64 = canvas.toDataURL("image/jpeg", 0.9);
-        
+
         if (croppedResult) {
             croppedResult.src = finalCroppedImageBase64;
-            croppedResult.style.display = 'block';
+            croppedResult.style.display = "block";
         }
-        
-        if (cropperWrap) cropperWrap.style.display = 'none';
-        previewIcon?.style.setProperty('display', 'none');
-        previewText?.style.setProperty('display', 'none');
+
+        if (cropperWrap) cropperWrap.style.display = "none";
+        previewIcon?.style.setProperty("display", "none");
+        previewText?.style.setProperty("display", "none");
     });
 
-    // ===== MODALS =====
-    addBtn?.addEventListener("click", () => eventModal.style.display = "flex");
-    
+    // ===== MODAL BUTTONS =====
+    addBtn?.addEventListener("click", () => {
+        resetForm();
+        eventModal.style.display = "flex";
+    });
+
     cancelBtn?.addEventListener("click", () => {
         eventModal.style.display = "none";
         resetForm();
     });
 
     uploadBtn?.addEventListener("click", async () => {
-        if (!finalCroppedImageBase64) return alert("Please set and crop your image first.");
-
         const payload = {
             title: titleInput.value.trim(),
             description: descInput.value.trim(),
-            image_url: finalCroppedImageBase64,
+            image_url: finalCroppedImageBase64 || uploadBtn.dataset.existingImage,
             ticket_price: parseFloat(ticketPriceInput.value) || 0,
             ticket_quantity: parseInt(ticketQuantityInput.value) || 0,
             event_date: eventDateInput.value
         };
 
         try {
-            const newEvent = await apiRequest("/api/events", { 
-                method: "POST", 
-                body: JSON.stringify(payload) 
-            });
-            renderEventCard(newEvent);
+            const editId = uploadBtn.dataset.editId;
+
+            if (editId) {
+                await apiRequest(`/api/events/${editId}`, {
+                    method: "PUT",
+                    body: JSON.stringify(payload)
+                });
+
+                delete uploadBtn.dataset.editId;
+                loadEvents();
+            } else {
+                await apiRequest("/api/events", {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                });
+
+                loadEvents();
+            }
+
             resetForm();
             if (eventModal) eventModal.style.display = "none";
         } catch (err) {
@@ -187,6 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // ===== RESET FORM =====
     function resetForm() {
         titleInput.value = "";
         descInput.value = "";
@@ -194,16 +298,25 @@ document.addEventListener("DOMContentLoaded", () => {
         ticketPriceInput.value = "";
         ticketQuantityInput.value = "";
         eventDateInput.value = "";
-        
+
         finalCroppedImageBase64 = null;
+
+        delete uploadBtn.dataset.editId;
+        delete uploadBtn.dataset.existingImage;
+
         if (croppedResult) {
             croppedResult.src = "";
-            croppedResult.style.display = 'none';
+            croppedResult.style.display = "none";
         }
-        if (cropperWrap) cropperWrap.style.display = 'none';
-        if (previewIcon) previewIcon.style.display = 'flex';
-        if (previewText) previewText.style.display = 'block';
-        if (cropper) cropper.destroy();
+
+        if (cropperWrap) cropperWrap.style.display = "none";
+        if (previewIcon) previewIcon.style.display = "flex";
+        if (previewText) previewText.style.display = "block";
+
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
     }
 
     loadEvents();

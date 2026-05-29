@@ -1,125 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JPEG Events – Admin Dashboard</title>
-    <script src="../Global/auth-util.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-    <script src="../Global/Theme.js"></script>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="../Global/profile.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JPEG Events – Admin Events</title>
+
+  <script src="../Global/auth-util.js"></script>
+  <script src="../Global/Theme.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../Global/profile.css"/>
 </head>
 
 <body>
 
-    <header class="topbar">
-        <div class="topbar-title">
-            <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
-            <span>JPEG EVENTS</span>
-        </div>
+<header class="topbar">
+  <div class="topbar-title">
+    <img src="../Images/tickets.png" class="sidebar-logo" alt="Logo"/>
+    <span>JPEG EVENTS</span>
+  </div>
 
-        <div class="user-info" id="userInfo">
-            <span id="usernameDisplay"></span>
-            <div class="avatar" id="avatarBtn"></div>
-        </div>
-    </header>
+  <div class="user-info" id="userInfo">
+    <span id="usernameDisplay"></span>
+    <div class="avatar" id="avatarBtn"></div>
+  </div>
+</header>
 
-    <div class="container">
-        <nav class="sidebar">
-            <div class="menu-item active">
-                <img src="../Images/Ticket.png" class="icons" alt="Events"></img>
-                <a href="Admin-Events.html" class="Side-Items">Events</a>
-            </div>
-            <div class="menu-item">
-                <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"></img>
-                <a href="Admin-Dashboard.html" class="Side-Items">Dashboard</a>
-            </div>
-            <div class="menu-item">
-                <img src="../Images/Analytics.png" class="icons" alt="Dashboard"></img>
-                <a href="Admin-Analytics.html" class="Side-Items">Analytics</a>
-            </div>
-            <div class="menu-item">
-                <img src="../Images/Settings.png" class="icons" alt="Settings"></img>
-                <a href="Admin-Setting.html" class="Side-Items">Settings</a>
-            </div>
-            <div class="menu-item">
-                <img src="../Images/Profile.png" class="icons" alt="Dashboard"></img>
-                <a href="Admin-Staff.html" class="Side-Items">Staff</a>
-            </div>
-        </nav>
+<div class="container">
 
-        <main class="main" id="eventContainer">
-            </main>
+  <aside class="sidebar">
+    <div class="menu-item active">
+      <img src="../Images/Ticket.png" class="icons" alt="Events"/>
+      <a href="Admin-Events.html" class="Side-Items">Events</a>
     </div>
 
-    <button class="add-btn" title="Add New Event">+</button>
-
-    <div class="modal" id="uploadModal">
-        <div class="upload-modal">
-            
-            <div class="upload-preview" id="previewContainer">
-                <input type="file" id="eventImage" accept="image/*">
-                <div class="upload-icon">+</div>
-                <div class="upload-hover">Select Poster</div>
-                <img id="croppedResult" style="display:none;" alt="Preview">
-            </div>
-            
-            <div id="cropperWrap" style="display:none; grid-column: 1 / span 2; background: #1c1428; padding: 20px; border-radius: 10px;">
-                <div style="max-height: 400px; overflow: hidden;">
-                    <img id="imageToCrop" style="max-width: 100%;">
-                </div>
-                <button type="button" id="saveCropBtn" class="upload-btn" style="margin-top: 15px; width: 100%;">Set Cropped Image</button>
-            </div>
-
-            <div class="upload-fields">
-                <label for="eventTitle">Event Title</label>
-                <input type="text" id="eventTitle" placeholder="What's the event called?">
-
-                <label for="eventDesc">Description</label>
-                <textarea id="eventDesc" placeholder="Describe the vibe..."></textarea>
-
-                <div style="display: flex; gap: 15px;">
-                    <div style="flex: 1;">
-                        <label for="ticketPrice">Price (₱)</label>
-                        <input type="number" id="ticketPrice" placeholder="0.00">
-                    </div>
-                    <div style="flex: 1;">
-                        <label for="ticketQuantity">Quantity</label>
-                        <input type="number" id="ticketQuantity" placeholder="100">
-                    </div>
-                </div>
-
-                <label for="eventDate">Event Date</label>
-                <input type="date" id="eventDate">
-
-                <div class="upload-actions">
-                    <button id="cancelBtn" class="cancel-btn">Cancel</button>
-                    <button id="uploadBtn" class="upload-btn">Upload Event</button>
-                </div>
-            </div>
-        </div>
+    <div class="menu-item">
+      <img src="../Images/Dashboard.png" class="icons" alt="Dashboard"/>
+      <a href="Admin-Dashboard.html" class="Side-Items">Dashboard</a>
     </div>
 
-    <div class="modal" id="profileModal">
-        <div class="modal-overlay"></div>
-        <div class="profile-modal-card">
-            <div class="profile-avatar-preview" id="profileAvatarPreview"></div>
-            <input type="file" id="profileImageInput" accept="image/*" style="display:none" />
-
-            <p id="profileName">Loading...</p>
-            <p id="profileEmail">Loading...</p>
-
-            <div class="profile-actions">
-                <button id="saveProfileBtn">Save</button>
-                <button id="closeProfileBtn">Close</button>
-                <button id="logoutBtn" class="logout-btn">Logout</button>
-            </div>
-        </div>
+    <div class="menu-item">
+      <img src="../Images/Analytics.png" class="icons" alt="Analytics"/>
+      <a href="Admin-Analytics.html" class="Side-Items">Analytics</a>
     </div>
 
-    <script src="Admin.js"></script>
-    <script src="../Global/profile.js"></script>
+    <div class="menu-item">
+      <img src="../Images/Settings.png" class="icons" alt="Settings"/>
+      <a href="Admin-Setting.html" class="Side-Items">Settings</a>
+    </div>
+
+    <div class="menu-item">
+      <img src="../Images/Profile.png" class="icons" alt="Staff"/>
+      <a href="Admin-Staff.html" class="Side-Items">Staff</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section class="dashboard-hero">
+      <div>
+        <p class="hero-label">Admin Panel</p>
+        <h1>Event Management</h1>
+        <p class="hero-subtitle">
+          Create, edit, archive, and manage event posters, dates, prices, and ticket stock.
+        </p>
+      </div>
+    </section>
+
+    <div class="event-tabs">
+      <button type="button" id="activeEventsBtn" class="tab-btn active">Active Events</button>
+      <button type="button" id="archivedEventsBtn" class="tab-btn">Archived Events</button>
+    </div>
+
+    <div id="eventContainer" class="event-container"></div>
+  </main>
+
+</div>
+
+<button class="add-btn" title="Add New Event">+</button>
+
+<div class="modal" id="uploadModal">
+  <div class="modal-overlay"></div>
+
+  <div class="upload-modal">
+
+    <div class="upload-preview" id="previewContainer">
+      <input type="file" id="eventImage" accept="image/*">
+      <div class="upload-icon">+</div>
+      <div class="upload-hover">Select Poster</div>
+      <img id="croppedResult" style="display:none;" alt="Preview">
+    </div>
+
+    <div id="cropperWrap" class="cropper-wrap">
+      <div class="cropper-box">
+        <img id="imageToCrop" alt="Crop preview">
+      </div>
+
+      <button type="button" id="saveCropBtn" class="upload-btn crop-save-btn">
+        Set Cropped Image
+      </button>
+    </div>
+
+    <div class="upload-fields">
+      <label for="eventTitle">Event Title</label>
+      <input type="text" id="eventTitle" placeholder="What's the event called?">
+
+      <label for="eventDesc">Description</label>
+      <textarea id="eventDesc" placeholder="Describe the event..."></textarea>
+
+      <div class="event-form-row">
+        <div>
+          <label for="ticketPrice">Price (₱)</label>
+          <input type="number" id="ticketPrice" placeholder="0.00">
+        </div>
+
+        <div>
+          <label for="ticketQuantity">Quantity</label>
+          <input type="number" id="ticketQuantity" placeholder="100">
+        </div>
+      </div>
+
+      <label for="eventDate">Event Date</label>
+      <input type="date" id="eventDate">
+
+      <div class="upload-actions">
+        <button type="button" id="cancelBtn" class="cancel-btn">Cancel</button>
+        <button type="button" id="uploadBtn" class="upload-btn">Upload Event</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal" id="profileModal">
+  <div class="modal-overlay"></div>
+
+  <div class="profile-modal-card">
+    <div class="profile-avatar-preview" id="profileAvatarPreview"></div>
+
+    <input
+      type="file"
+      id="profileImageInput"
+      accept="image/*"
+      style="display:none"
+    />
+
+    <p id="profileName">Loading...</p>
+    <p id="profileEmail">Loading...</p>
+
+    <div class="profile-actions">
+      <button type="button" id="saveProfileBtn">Save</button>
+      <button type="button" id="closeProfileBtn">Close</button>
+      <button type="button" id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+  </div>
+</div>
+
+<script src="Admin.js"></script>
+<script src="../Global/profile.js"></script>
+
 </body>
 </html>
